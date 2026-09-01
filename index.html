@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="auto">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <title>İkarus - QR Bülten</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Archivo:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Archivo', system-ui, sans-serif;
+    }
+    a { text-decoration: none; }
+    button { font-family: inherit; }
+    
+    [data-theme="light"], [data-theme="auto"] {
+      --bg: #FFFFFF; --surf: #F6FAFA; --surf2: #EFF7F7; --ink: #1B2733; --head: #0F2243; --muted: #5C6B79;
+      --rule: #DCE3E9; --hair: #EDF1F5; --accent: #189B93; --accent-d: #116E68; --on-accent: #FFFFFF;
+      --bd: rgba(15,34,67,.10); --navy-surf: #0F2243; --on-navy: #FFFFFF;
+    }
+    [data-theme="dark"] {
+      --bg: #1A1C1D; --surf: #232628; --surf2: #282C2C; --ink: #DFE3E5; --head: #F3F5F6; --muted: #9BA2A7;
+      --rule: rgba(255,255,255,.13); --hair: rgba(255,255,255,.08); --accent: #1FAEA5; --accent-d: #7CD6D0; --on-accent: #03202A;
+      --bd: rgba(255,255,255,.11); --navy-surf: #212426; --on-navy: #EDF0F1;
+    }
+    @media (prefers-color-scheme: dark) {
+      [data-theme="auto"] {
+        --bg: #1A1C1D; --surf: #232628; --surf2: #282C2C; --ink: #DFE3E5; --head: #F3F5F6; --muted: #9BA2A7;
+        --rule: rgba(255,255,255,.13); --hair: rgba(255,255,255,.08); --accent: #1FAEA5; --accent-d: #7CD6D0; --on-accent: #03202A;
+        --bd: rgba(255,255,255,.11); --navy-surf: #212426; --on-navy: #EDF0F1;
+      }
+    }
+    
+    [data-theme="dark"] [data-lightonly] { display: none !important; }
+    [data-theme="light"] [data-darkonly] { display: none !important; }
+    @media (prefers-color-scheme: dark) {
+      [data-theme="auto"] [data-lightonly] { display: none !important; }
+    }
+    @media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+      [data-theme="auto"] [data-darkonly] { display: none !important; }
+    }
+    
+    [data-row]:active { background: var(--surf2) !important; }
+    
+    /* Layout */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--bg);
+      position: relative;
+    }
+    
+    .header-area {
+      position: relative;
+      background: var(--accent);
+      clip-path: polygon(0 0, 100% 0, 100% 78%, 0 100%);
+      padding: 20px 22px 34px;
+    }
+    
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .controls {
+      display: flex;
+      gap: 4px;
+    }
+    
+    .btn-icon {
+      border: 1px solid rgba(255,255,255,.4);
+      background: transparent;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      width: 32px;
+      min-height: 32px;
+      padding: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-icon:active {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .btn-text {
+      border: 1px solid rgba(255,255,255,.4);
+      background: transparent;
+      color: #fff;
+      font: 600 9.5px/1 'Archivo', sans-serif;
+      letter-spacing: .1em;
+      padding: 0 10px;
+      min-height: 32px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-text:active {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .banner-link-container {
+      padding: 6px 22px 0;
+    }
+    .banner-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 60px;
+      padding: 0 18px;
+      background: var(--head);
+      color: var(--bg);
+      font: 600 15px/1 'Archivo', sans-serif;
+    }
+    
+    .grid-links {
+      padding: 14px 22px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+    .grid-item {
+      display: grid;
+      align-content: space-between;
+      min-height: 92px;
+      padding: 12px 13px;
+      background: var(--surf);
+      color: var(--ink);
+    }
+    .grid-item span {
+      font: 600 15px/1.2 'Archivo', sans-serif;
+      color: var(--head);
+    }
+    
+    .offices-section {
+      padding: 18px 22px 0;
+    }
+    .section-title {
+      font: 600 9.5px/1.2 'Archivo', sans-serif;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    
+    .list-item {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-height: 46px;
+      color: var(--ink);
+      font: 500 14px/1.2 'Archivo', sans-serif;
+    }
+    .list-item-bordered {
+      border-bottom: 1px solid var(--hair);
+    }
+    
+    .footer-area {
+      margin-top: auto;
+      padding: 14px 22px 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <div class="header-area">
+      <div class="top-bar">
+        <div class="controls">
+          <button type="button" id="themeToggleBtn" class="btn-icon" aria-label="Tema">
+            <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px">
+              <path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"></path>
+            </svg>
+          </button>
+          <button type="button" id="langToggleBtn" class="btn-text">EN</button>
+        </div>
+      </div>
+      <div class="brand">
+        <img src="assets/ikarus-amblem-beyaz.svg" alt="" style="height:52px;width:auto;display:block">
+        <img src="assets/ikarus-yazi-beyaz.svg" alt="İkarus" style="height:22px;width:auto;display:block">
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="banner-link-container">
+        <a href="#" id="link-openissue" class="banner-link">
+          <span data-i18n="openissue">Son sayıyı aç</span><span style="font-size:18px">→</span>
+        </a>
+      </div>
+
+      <div class="grid-links">
+        <a data-row href="https://www.investikarus.com/index.html" id="link-website" target="_blank" rel="noopener" class="grid-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;justify-self:end"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9z"></path></svg>
+          <span data-i18n="web4">Web sitesi</span>
+        </a>
+        <a data-row href="mailto:info@investikarus.com" id="link-email" class="grid-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;justify-self:end"><rect x="3" y="5.5" width="18" height="13" rx="1.5"></rect><path d="M3.6 6.6 12 13l8.4-6.4"></path></svg>
+          <span data-i18n="mail4">E-posta</span>
+        </a>
+        <a data-row href="tel:+903125118300" id="link-phone" class="grid-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;justify-self:end"><path d="M6.2 3.5h3l1.5 4-2 1.4a12 12 0 0 0 5.4 5.4l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.2 5.7a2 2 0 0 1 2-2.2z"></path></svg>
+          <span data-i18n="phone4">Telefon</span>
+        </a>
+        <a data-row href="#" id="link-archive" class="grid-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;justify-self:end"><path d="M4 5.5h9.5a2 2 0 0 1 2 2v11H6a2 2 0 0 1-2-2z"></path><path d="M15.5 8.5H19a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2h-2.5"></path><path d="M7 9h6M7 12h6M7 15h4"></path></svg>
+          <span data-i18n="archive4">Bülten arşivi</span>
+        </a>
+        <a data-row href="https://www.linkedin.com/company/i̇karus-yöneti̇m/?viewAsMember=true" id="link-linkedin" target="_blank" rel="noopener" class="grid-item">
+          <svg viewBox="0 0 24 24" fill="var(--accent)" style="width:22px;height:22px;justify-self:end"><path d="M4.6 8.9h2.9V19H4.6zM6 4.2a1.7 1.7 0 1 1 0 3.4 1.7 1.7 0 0 1 0-3.4zM9.6 8.9h2.8v1.4a3.1 3.1 0 0 1 2.8-1.5c2.2 0 3.4 1.4 3.4 4V19h-2.9v-5.6c0-1.3-.5-2.1-1.6-2.1s-1.8.8-1.8 2.1V19H9.6z"></path></svg>
+          <span>LinkedIn</span>
+        </a>
+        <a data-row href="https://www.instagram.com/ikarusyonetim?igsh=MzBuZzRuMnZyZ3h4" id="link-instagram" target="_blank" rel="noopener" class="grid-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;justify-self:end"><rect x="4" y="4" width="16" height="16" rx="4.6"></rect><circle cx="12" cy="12" r="3.9"></circle><circle cx="16.9" cy="7.1" r="1" fill="var(--accent)" stroke="none"></circle></svg>
+          <span>Instagram</span>
+        </a>
+      </div>
+
+      <div class="offices-section">
+        <div data-i18n="offices4" class="section-title">Ofisler</div>
+        <a data-row href="https://www.google.com/maps/search/?api=1&query=Alacaatlı+Mahallesi+3306%2F1+Sokak+No%3A9+06810+Çankaya+Ankara" id="link-ankara" target="_blank" rel="noopener" class="list-item list-item-bordered">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M12 21s6.4-6.1 6.4-10.4A6.4 6.4 0 0 0 5.6 10.6C5.6 14.9 12 21 12 21z"></path><circle cx="12" cy="10.4" r="2.4"></circle></svg>
+          <span>Ankara</span>
+          <span style="margin-left:auto;color:var(--accent)">→</span>
+        </a>
+        <a data-row href="https://www.google.com/maps/search/?api=1&query=Emirgan+Mah.+Sakıp+Sabancı+Cd.+No%3A36%2F10+Sarıyer+İstanbul" id="link-istanbul" target="_blank" rel="noopener" class="list-item list-item-bordered">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M12 21s6.4-6.1 6.4-10.4A6.4 6.4 0 0 0 5.6 10.6C5.6 14.9 12 21 12 21z"></path><circle cx="12" cy="10.4" r="2.4"></circle></svg>
+          <span>İstanbul</span>
+          <span style="margin-left:auto;color:var(--accent)">→</span>
+        </a>
+        <a data-row href="https://www.google.com/maps/search/?api=1&query=48+Carnarvon+Road+E1B+2NU+London+UK" id="link-london" target="_blank" rel="noopener" class="list-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M12 21s6.4-6.1 6.4-10.4A6.4 6.4 0 0 0 5.6 10.6C5.6 14.9 12 21 12 21z"></path><circle cx="12" cy="10.4" r="2.4"></circle></svg>
+          <span data-i18n="london4">Londra</span>
+          <span style="margin-left:auto;color:var(--accent)">→</span>
+        </a>
+      </div>
+
+      <div class="footer-area">
+        <img data-lightonly src="assets/ikarus-yazi-slogan.svg" alt="İkarus" style="width:118px;height:auto;display:block;opacity:.75">
+        <img data-darkonly src="assets/ikarus-yazi-slogan-beyaz.svg" alt="İkarus" style="width:118px;height:auto;display:block;opacity:.75">
+      </div>
+    </div>
+  </div>
+
+  <div id="comingSoonModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,34,67,0.4); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+    <div style="background: var(--bg); color: var(--ink); padding: 24px 32px; border-radius: 14px; border: 1px solid var(--bd); box-shadow: 0 8px 24px rgba(15,34,67,0.12); text-align: center; max-width: 80%; transform: translateY(10px); animation: modalRise 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;">
+      <div data-i18n="comingsoon" style="font: 600 17px/1.4 'Archivo', sans-serif; color: var(--head);">Çok yakında...</div>
+      <button type="button" id="closeModalBtn" style="margin-top: 20px; background: var(--surf); color: var(--head); border: 1px solid var(--bd); padding: 10px 24px; border-radius: 8px; font: 600 14px/1 'Archivo', sans-serif; cursor: pointer;">
+        <span data-i18n="close">Kapat</span>
+      </button>
+    </div>
+  </div>
+  <style>
+    @keyframes modalRise {
+      to { transform: translateY(0); }
+    }
+  </style>
+
+  <script>
+    // Theme logic
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const htmlEl = document.documentElement;
+
+    const iconMoon = '<path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"></path>';
+    const iconSun = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+
+    function updateThemeIcon(theme) {
+      const isDark = theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      themeIcon.innerHTML = isDark ? iconSun : iconMoon;
+    }
+
+    let currentTheme = localStorage.getItem('ikarus-theme') || 'auto';
+    htmlEl.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const isDark = currentTheme === 'dark' || (currentTheme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      currentTheme = isDark ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('ikarus-theme', currentTheme);
+      updateThemeIcon(currentTheme);
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (currentTheme === 'auto') {
+        updateThemeIcon('auto');
+      }
+    });
+
+    // Language logic
+    const langBtn = document.getElementById('langToggleBtn');
+    let currentLang = localStorage.getItem('ikarus-lang') || 'tr';
+    
+    const translations = {
+      'tr': {
+        'openissue': 'Son sayıyı aç',
+        'web4': 'Web sitesi',
+        'mail4': 'E-posta',
+        'phone4': 'Telefon',
+        'archive4': 'Bülten arşivi',
+        'offices4': 'Ofisler',
+        'london4': 'Londra',
+        'toggleLabel': 'EN',
+        'comingsoon': 'Çok yakında...',
+        'close': 'Kapat'
+      },
+      'en': {
+        'openissue': 'Open latest issue',
+        'web4': 'Website',
+        'mail4': 'Email',
+        'phone4': 'Phone',
+        'archive4': 'Newsletter archive',
+        'offices4': 'Offices',
+        'london4': 'London',
+        'toggleLabel': 'TR',
+        'comingsoon': 'Coming soon...',
+        'close': 'Close'
+      }
+    };
+
+    function applyLanguage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      langBtn.textContent = translations[lang].toggleLabel;
+      htmlEl.setAttribute('lang', lang);
+    }
+
+    applyLanguage(currentLang);
+
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'tr' ? 'en' : 'tr';
+      localStorage.setItem('ikarus-lang', currentLang);
+      applyLanguage(currentLang);
+    });
+
+    // Coming soon modal logic
+    const modal = document.getElementById('comingSoonModal');
+    const closeBtn = document.getElementById('closeModalBtn');
+    
+    function openModal(e) {
+      e.preventDefault();
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    document.getElementById('link-openissue').addEventListener('click', openModal);
+    document.getElementById('link-archive').addEventListener('click', openModal);
+    
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  </script>
+</body>
+</html>

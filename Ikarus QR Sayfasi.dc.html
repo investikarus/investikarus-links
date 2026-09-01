@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&amp;family=Archivo:wght@300;400;500;600;700&amp;family=Quicksand:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#EDF0F2;font-family:'Archivo',system-ui,sans-serif}
+a{color:#116E68;text-decoration:none}
+a:hover{color:#189B93}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(15,34,67,.10);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 18px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#0F2243;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 'Archivo',sans-serif;color:#0F2243}
+.dv-opts{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(15,34,67,.09);color:#0F2243;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11.5px/1.3 'Archivo',sans-serif;color:rgba(15,34,67,.6)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(15,34,67,.10);border-radius:14px;box-shadow:0 2px 10px rgba(15,34,67,.08);overflow:hidden}
+.dv-opt:target .dv-oid{background:#189B93;color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.6 'Archivo',sans-serif;color:rgba(15,34,67,.55)}
+[data-card]{scrollbar-width:thin}
+[data-card]::-webkit-scrollbar{width:0}
+[data-theme="dark"] [data-lightonly]{display:none!important}
+[data-theme="light"] [data-darkonly]{display:none!important}
+@media (prefers-color-scheme:dark){[data-theme="auto"] [data-lightonly]{display:none!important}}
+@media (prefers-color-scheme:light),(prefers-color-scheme:no-preference){[data-theme="auto"] [data-darkonly]{display:none!important}}
+[data-theme="light"],[data-theme="auto"]{
+--bg:#FFFFFF;--surf:#F6FAFA;--surf2:#EFF7F7;--ink:#1B2733;--head:#0F2243;--muted:#5C6B79;
+--rule:#DCE3E9;--hair:#EDF1F5;--accent:#189B93;--accent-d:#116E68;--on-accent:#FFFFFF;
+--bd:rgba(15,34,67,.10);--navy-surf:#0F2243;--on-navy:#FFFFFF}
+[data-theme="dark"]{
+--bg:#1A1C1D;--surf:#232628;--surf2:#282C2C;--ink:#DFE3E5;--head:#F3F5F6;--muted:#9BA2A7;
+--rule:rgba(255,255,255,.13);--hair:rgba(255,255,255,.08);--accent:#1FAEA5;--accent-d:#7CD6D0;--on-accent:#03202A;
+--bd:rgba(255,255,255,.11);--navy-surf:#212426;--on-navy:#EDF0F1}
+@media (prefers-color-scheme:dark){[data-theme="auto"]{
+--bg:#1A1C1D;--surf:#232628;--surf2:#282C2C;--ink:#DFE3E5;--head:#F3F5F6;--muted:#9BA2A7;
+--rule:rgba(255,255,255,.13);--hair:rgba(255,255,255,.08);--accent:#1FAEA5;--accent-d:#7CD6D0;--on-accent:#03202A;
+--bd:rgba(255,255,255,.11);--navy-surf:#212426;--on-navy:#EDF0F1}}
+[data-row]:active{background:var(--surf)}
+@keyframes ikrise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Daha sade, daha somut — üç farklı etkileşim modeli</span></div>
+<p style="margin:-8px 0 20px;max-width:640px;font:400 12.5px/1.65 'Archivo',sans-serif;color:rgba(15,34,67,.6)">Turn 1'deki kart yığınını bıraktım. Üçünde de tek vurgu rengi, tek yazı ritmi ve tek etkileşim kuralı var; fark neyin görünür olduğunda: hepsi birden, sırayla, ya da istendiğinde.</p>
+<div class="dv-opts">
+
+<div class="dv-opt" id="2a">
+  <div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Tek ekran — kaydırma yok, her şey tek dokunuş</div>
+  <div class="dv-card" style="width:390px">
+    <div data-card data-theme="auto" style="width:390px;height:790px;overflow:hidden;background:var(--bg);color:var(--ink);font:400 14px/1.5 'Archivo',sans-serif;display:flex;flex-direction:column">
+
+      <div style="position:relative;background:var(--accent);clip-path:polygon(0 0,100% 0,100% 78%,0 100%);padding:20px 22px 34px">
+        <div style="display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-bottom:20px">
+          <div style="display:flex;gap:4px">
+            <button type="button" data-tt aria-label="Tema" onClick="{{ themeToggle }}" style="border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;display:grid;place-items:center;width:32px;min-height:32px;padding:0;border-radius:999px;cursor:pointer"><svg data-ticon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"></path></svg></button>
+            <button type="button" data-lt onClick="{{ langToggle }}" style="border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.1em;padding:0 10px;min-height:32px;border-radius:999px;cursor:pointer">EN</button>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <img src="assets/ikarus-amblem-beyaz.svg" alt="" style="height:52px;width:auto;display:block">
+          <img src="assets/ikarus-yazi-beyaz.svg" alt="İkarus" style="height:22px;width:auto;display:block">
+        </div>
+      </div>
+
+      <div style="padding:6px 22px 0">
+        <a href="#" style="display:flex;align-items:center;justify-content:space-between;min-height:60px;padding:0 18px;background:var(--head);color:var(--bg);font:600 15px/1 'Archivo',sans-serif">
+          <span data-i18n="openissue">Son sayıyı aç</span><span style="font-size:18px">→</span>
+        </a>
+      </div>
+
+      <div style="padding:14px 22px 0;display:grid;grid-template-columns:1fr 1fr;gap:9px">
+        <a data-row href="https://www.investikarus.com/index.html" target="_blank" rel="noopener" style="display:grid;align-content:space-between;min-height:92px;padding:12px 13px;background:var(--surf);color:var(--ink)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;justify-self:end"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9z"></path></svg>
+          <span data-i18n="web4" style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Web sitesi</span>
+        </a>
+        <a data-row href="mailto:info@investikarus.com" style="display:grid;align-content:space-between;min-height:92px;padding:12px 13px;background:var(--surf);color:var(--ink)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;justify-self:end"><rect x="3" y="5.5" width="18" height="13" rx="1.5"></rect><path d="M3.6 6.6 12 13l8.4-6.4"></path></svg>
+          <span data-i18n="mail4" style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">E-posta</span>
+        </a>
+        <a data-row href="tel:+903125118300" style="display:grid;align-content:space-between;min-height:92px;padding:12px 13px;background:var(--surf);color:var(--ink)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;justify-self:end"><path d="M6.2 3.5h3l1.5 4-2 1.4a12 12 0 0 0 5.4 5.4l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.2 5.7a2 2 0 0 1 2-2.2z"></path></svg>
+          <span data-i18n="phone4" style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Telefon</span>
+        </a>
+        <a data-row href="#" style="display:grid;align-content:space-between;min-height:92px;padding:12px 13px;background:var(--surf);color:var(--ink)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;justify-self:end"><path d="M4 5.5h9.5a2 2 0 0 1 2 2v11H6a2 2 0 0 1-2-2z"></path><path d="M15.5 8.5H19a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2h-2.5"></path><path d="M7 9h6M7 12h6M7 15h4"></path></svg>
+          <span data-i18n="archive4" style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Bülten arşivi</span>
+        </a>
+        <a data-row href="https://www.linkedin.com/company/i̇karus-yöneti̇m/?viewAsMember=true" target="_blank" rel="noopener" style="display:grid;align-content:space-between;min-height:92px;padding:12px 13px;background:var(--surf);color:var(--ink)">
+          <svg viewBox="0 0 24 24" fill="var(--accent)" style="width:22px;height:22px;justify-self:end"><path d="M4.6 8.9h2.9V19H4.6zM6 4.2a1.7 1.7 0 1 1 0 3.4 1.7 1.7 0 0 1 0-3.4zM9.6 8.9h2.8v1.4a3.1 3.1 0 0 1 2.8-1.5c2.2 0 3.4 1.4 3.4 4V19h-2.9v-5.6c0-1.3-.5-2.1-1.6-2.1s-1.8.8-1.8 2.1V19H9.6z"></path></svg>
+          <span style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">LinkedIn</span>
+        </a>
+        <a data-row href="https://www.instagram.com/ikarusyonetim?igsh=MzBuZzRuMnZyZ3h4" target="_blank" rel="noopener" style="display:grid;align-content:space-between;min-height:92px;padding:12px 13px;background:var(--surf);color:var(--ink)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;justify-self:end"><rect x="4" y="4" width="16" height="16" rx="4.6"></rect><circle cx="12" cy="12" r="3.9"></circle><circle cx="16.9" cy="7.1" r="1" fill="var(--accent)" stroke="none"></circle></svg>
+          <span style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Instagram</span>
+        </a>
+      </div>
+
+      <div style="padding:18px 22px 0">
+        <div data-i18n="offices4" style="font:600 9.5px/1.2 'Archivo',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Ofisler</div>
+        <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=Alacaatl%C4%B1+Mahallesi+3306%2F1+Sokak+No%3A9+06810+%C3%87ankaya+Ankara" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:11px;min-height:46px;border-bottom:1px solid var(--hair);color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M12 21s6.4-6.1 6.4-10.4A6.4 6.4 0 0 0 5.6 10.6C5.6 14.9 12 21 12 21z"></path><circle cx="12" cy="10.4" r="2.4"></circle></svg><span>Ankara</span><span style="margin-left:auto;color:var(--accent)">→</span></a>
+        <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=Emirgan+Mah.+Sak%C4%B1p+Sabanc%C4%B1+Cd.+No%3A36%2F10+Sar%C4%B1yer+%C4%B0stanbul" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:11px;min-height:46px;border-bottom:1px solid var(--hair);color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M12 21s6.4-6.1 6.4-10.4A6.4 6.4 0 0 0 5.6 10.6C5.6 14.9 12 21 12 21z"></path><circle cx="12" cy="10.4" r="2.4"></circle></svg><span>İstanbul</span><span style="margin-left:auto;color:var(--accent)">→</span></a>
+        <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=48+Carnarvon+Road+E1B+2NU+London+UK" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:11px;min-height:46px;color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex:none"><path d="M12 21s6.4-6.1 6.4-10.4A6.4 6.4 0 0 0 5.6 10.6C5.6 14.9 12 21 12 21z"></path><circle cx="12" cy="10.4" r="2.4"></circle></svg><span data-i18n="london4">Londra</span><span style="margin-left:auto;color:var(--accent)">→</span></a>
+      </div>
+
+      <div style="margin-top:auto;padding:14px 22px 18px">
+        <img data-lightonly src="assets/ikarus-yazi-slogan.svg" alt="İkarus" style="width:118px;height:auto;display:block;opacity:.75">
+        <img data-darkonly src="assets/ikarus-yazi-slogan-beyaz.svg" alt="İkarus" style="width:118px;height:auto;display:block;opacity:.75">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="dv-opt" id="2b">
+  <div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Kama sekmesi — tek seferde tek bölüm, yerinde değişir</div>
+  <div class="dv-card" style="width:390px">
+    <div data-card data-theme="auto" data-segwrap style="width:390px;height:790px;overflow-y:auto;overflow-x:hidden;background:var(--bg);color:var(--ink);font:400 14px/1.5 'Archivo',sans-serif">
+
+      <div style="position:relative;background:var(--navy-surf);overflow:hidden;padding:20px 24px 30px">
+        <img src="assets/ikarus-amblem-beyaz.svg" alt="" style="position:absolute;right:-40px;top:-30px;width:180px;height:auto;opacity:.07;pointer-events:none">
+        <div style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:26px">
+          <img src="assets/ikarus-yazi-beyaz.svg" alt="İkarus" style="height:13px;width:auto;display:block">
+          <div style="display:flex;gap:4px">
+            <button type="button" data-tt aria-label="Tema" onClick="{{ themeToggle }}" style="border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;display:grid;place-items:center;width:32px;min-height:32px;padding:0;border-radius:999px;cursor:pointer"><svg data-ticon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"></path></svg></button>
+            <button type="button" data-lt onClick="{{ langToggle }}" style="border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.1em;padding:0 10px;min-height:32px;border-radius:999px;cursor:pointer">EN</button>
+          </div>
+        </div>
+        <div style="position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:14px">
+          <div>
+            <div style="font:700 11px/1 'Quicksand',sans-serif;letter-spacing:.36em;color:var(--accent);margin-bottom:9px">BÜLTEN</div>
+            <div data-i18n="aug3" style="font:600 26px/1.1 'Spectral',Georgia,serif;color:#fff">Ağustos 2026</div>
+          </div>
+          <div style="font:600 44px/1 'Spectral',Georgia,serif;color:rgba(255,255,255,.22)">08</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--hair);background:var(--bg);position:sticky;top:0;z-index:2">
+        <button type="button" data-seg="b" onClick="{{ seg }}" style="border:0;border-bottom:2px solid var(--accent);background:transparent;color:var(--head);font:600 12px/1 'Archivo',sans-serif;letter-spacing:.06em;min-height:48px;cursor:pointer" data-i18n="tabIssue">Bülten</button>
+        <button type="button" data-seg="i" onClick="{{ seg }}" style="border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font:600 12px/1 'Archivo',sans-serif;letter-spacing:.06em;min-height:48px;cursor:pointer" data-i18n="tabContact">İletişim</button>
+        <button type="button" data-seg="o" onClick="{{ seg }}" style="border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font:600 12px/1 'Archivo',sans-serif;letter-spacing:.06em;min-height:48px;cursor:pointer" data-i18n="tabOffices">Ofisler</button>
+      </div>
+
+      <div data-panel="b" style="padding:22px 24px 26px">
+        <a href="#" style="display:flex;align-items:center;justify-content:space-between;min-height:58px;padding:0 18px;background:var(--accent);color:var(--on-accent);font:600 14.5px/1 'Archivo',sans-serif;margin-bottom:20px">
+          <span data-i18n="openpdf">PDF olarak aç</span><span style="font-size:17px">→</span>
+        </a>
+        <div data-i18n="past" style="font:600 9.5px/1.2 'Archivo',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">Geçmiş sayılar</div>
+        <a data-row href="#" style="display:grid;grid-template-columns:36px 1fr auto;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)"><span style="font:400 17px/1 'Spectral',Georgia,serif;color:var(--muted)">07</span><span data-i18n="jul" style="font:500 14px/1.2 'Archivo',sans-serif;color:var(--head)">Temmuz 2026</span><span style="color:var(--accent)">→</span></a>
+        <a data-row href="#" style="display:grid;grid-template-columns:36px 1fr auto;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)"><span style="font:400 17px/1 'Spectral',Georgia,serif;color:var(--muted)">06</span><span data-i18n="jun" style="font:500 14px/1.2 'Archivo',sans-serif;color:var(--head)">Haziran 2026</span><span style="color:var(--accent)">→</span></a>
+        <a data-row href="#" style="display:grid;grid-template-columns:36px 1fr auto;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)"><span style="font:400 17px/1 'Spectral',Georgia,serif;color:var(--muted)">05</span><span data-i18n="may" style="font:500 14px/1.2 'Archivo',sans-serif;color:var(--head)">Mayıs 2026</span><span style="color:var(--accent)">→</span></a>
+        <a data-row href="#" style="display:flex;align-items:center;min-height:50px;color:var(--accent-d);font:600 12px/1 'Archivo',sans-serif"><span data-i18n="allissues">Tüm sayılar</span><span style="margin-left:6px">→</span></a>
+      </div>
+
+      <div data-panel="i" style="display:none;padding:22px 24px 26px">
+        <a data-row href="https://www.investikarus.com/index.html" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--hair);color:var(--ink)"><span data-i18n="web3" style="font:600 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Web</span><span style="grid-row:2;font:500 15px/1.3 'Archivo',sans-serif;color:var(--head)">investikarus.com</span><span style="grid-row:span 2;grid-column:2;color:var(--accent)">↗</span></a>
+        <a data-row href="mailto:info@investikarus.com" style="display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--hair);color:var(--ink)"><span data-i18n="mail3" style="font:600 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">E-posta</span><span style="grid-row:2;font:500 15px/1.3 'Archivo',sans-serif;color:var(--head)">info@investikarus.com</span><span style="grid-row:span 2;grid-column:2;color:var(--accent)">→</span></a>
+        <a data-row href="tel:+903125118300" style="display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--hair);color:var(--ink)"><span data-i18n="phone3" style="font:600 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Telefon</span><span style="grid-row:2;font:500 15px/1.3 'Archivo',sans-serif;color:var(--head)">+90 (312) 511 83 00</span><span style="grid-row:span 2;grid-column:2;color:var(--accent)">→</span></a>
+        <a data-row href="https://www.linkedin.com/company/i̇karus-yöneti̇m/?viewAsMember=true" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--hair);color:var(--ink)"><span style="font:600 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">LinkedIn</span><span style="grid-row:2;font:500 15px/1.3 'Archivo',sans-serif;color:var(--head)">İkarus Yönetim</span><span style="grid-row:span 2;grid-column:2;color:var(--accent)">↗</span></a>
+        <a data-row href="https://www.instagram.com/ikarusyonetim?igsh=MzBuZzRuMnZyZ3h4" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;padding:14px 0;color:var(--ink)"><span style="font:600 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Instagram</span><span style="grid-row:2;font:500 15px/1.3 'Archivo',sans-serif;color:var(--head)">@ikarusyonetim</span><span style="grid-row:span 2;grid-column:2;color:var(--accent)">↗</span></a>
+      </div>
+
+      <div data-panel="o" style="display:none;padding:22px 24px 26px">
+        <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=Alacaatl%C4%B1+Mahallesi+3306%2F1+Sokak+No%3A9+06810+%C3%87ankaya+Ankara" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--hair);color:var(--ink)"><span style="display:flex;align-items:baseline;gap:9px"><span style="font:600 16px/1.2 'Archivo',sans-serif;color:var(--head)">Ankara</span><span data-i18n="hq3" style="font:600 8.5px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-d)">Merkez</span></span><span style="grid-row:2;font:400 12.5px/1.55 'Archivo',sans-serif;color:var(--muted);max-width:31ch">Alacaatlı Mahallesi 3306/1 Sokak No:9 06810 Çankaya-ANKARA</span><span style="grid-row:span 2;grid-column:2;align-self:center;color:var(--accent)">→</span></a>
+        <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=Emirgan+Mah.+Sak%C4%B1p+Sabanc%C4%B1+Cd.+No%3A36%2F10+Sar%C4%B1yer+%C4%B0stanbul" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--hair);color:var(--ink)"><span style="font:600 16px/1.2 'Archivo',sans-serif;color:var(--head)">İstanbul</span><span style="grid-row:2;font:400 12.5px/1.55 'Archivo',sans-serif;color:var(--muted);max-width:31ch">Emirgan Mah. Sakıp Sabancı Cd. No:36/10 Sarıyer/İSTANBUL</span><span style="grid-row:span 2;grid-column:2;align-self:center;color:var(--accent)">→</span></a>
+        <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=48+Carnarvon+Road+E1B+2NU+London+UK" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:16px 0;color:var(--ink)"><span data-i18n="london3" style="font:600 16px/1.2 'Archivo',sans-serif;color:var(--head)">Londra</span><span style="grid-row:2;font:400 12.5px/1.55 'Archivo',sans-serif;color:var(--muted);max-width:31ch">48 Carnarvon Road, E1B 2NU, LONDON/UK</span><span style="grid-row:span 2;grid-column:2;align-self:center;color:var(--accent)">→</span></a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="dv-opt" id="2c">
+  <div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Tipografik liste — üç satır, dokununca yerinde açılır</div>
+  <div class="dv-card" style="width:390px">
+    <div data-card data-theme="auto" style="width:390px;height:790px;overflow-y:auto;overflow-x:hidden;background:var(--bg);color:var(--ink);font:400 14px/1.5 'Archivo',sans-serif">
+
+      <div style="padding:22px 26px 0;display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <img data-lightonly src="assets/ikarus-yazi.svg" alt="İkarus" style="height:11px;width:auto;display:block">
+        <img data-darkonly src="assets/ikarus-yazi-beyaz.svg" alt="İkarus" style="height:11px;width:auto;display:block">
+        <div style="display:flex;gap:12px">
+          <button type="button" data-tt aria-label="Tema" onClick="{{ themeToggle }}" style="border:0;background:transparent;color:var(--muted);display:grid;place-items:center;width:26px;min-height:32px;cursor:pointer;padding:0"><svg data-ticon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"></path></svg></button>
+          <button type="button" data-lt onClick="{{ langToggle }}" style="border:0;background:transparent;color:var(--muted);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;min-height:32px;cursor:pointer;padding:0">EN</button>
+        </div>
+      </div>
+
+      <div style="padding:44px 26px 0">
+        <div style="font:700 11px/1 'Quicksand',sans-serif;letter-spacing:.36em;color:var(--accent);margin-bottom:14px">BÜLTEN</div>
+        <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:16px">
+          <span style="font:600 72px/.82 'Spectral',Georgia,serif;color:var(--head);letter-spacing:-.02em">08</span>
+          <span data-i18n="aug3" style="font:400 15px/1.35 'Archivo',sans-serif;color:var(--muted);padding-top:6px;max-width:12ch">Ağustos 2026</span>
+        </div>
+        <a href="#" style="display:inline-flex;align-items:center;min-height:48px;border-bottom:2px solid var(--accent);color:var(--head);font:600 15px/1 'Archivo',sans-serif"><span data-i18n="openissue2">Son sayıyı aç</span><span style="margin-left:10px;color:var(--accent);font-size:17px">→</span></a>
+      </div>
+
+      <div style="padding:44px 26px 0">
+        <button type="button" onClick="{{ acc }}" style="width:100%;border:0;border-top:1px solid var(--rule);background:transparent;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 0;cursor:pointer;text-align:left">
+          <span data-i18n="accArchive" style="font:400 30px/1 'Spectral',Georgia,serif;color:var(--head)">Arşiv</span>
+          <span data-glyph style="font:300 24px/1 'Archivo',sans-serif;color:var(--accent)">+</span>
+        </button>
+        <div data-open="0" style="display:none;padding-bottom:14px">
+          <a data-row href="#" style="display:flex;align-items:center;justify-content:space-between;min-height:52px;border-top:1px solid var(--hair);color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><span data-i18n="jul3">Temmuz 2026</span><span style="color:var(--accent)">→</span></a>
+          <a data-row href="#" style="display:flex;align-items:center;justify-content:space-between;min-height:52px;border-top:1px solid var(--hair);color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><span data-i18n="jun3">Haziran 2026</span><span style="color:var(--accent)">→</span></a>
+          <a data-row href="#" style="display:flex;align-items:center;justify-content:space-between;min-height:52px;border-top:1px solid var(--hair);color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><span data-i18n="may3">Mayıs 2026</span><span style="color:var(--accent)">→</span></a>
+        </div>
+
+        <button type="button" onClick="{{ acc }}" style="width:100%;border:0;border-top:1px solid var(--rule);background:transparent;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 0;cursor:pointer;text-align:left">
+          <span data-i18n="accContact" style="font:400 30px/1 'Spectral',Georgia,serif;color:var(--head)">İletişim</span>
+          <span data-glyph style="font:300 24px/1 'Archivo',sans-serif;color:var(--accent)">+</span>
+        </button>
+        <div data-open="0" style="display:none;padding-bottom:14px">
+          <a data-row href="https://www.investikarus.com/index.html" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;min-height:52px;border-top:1px solid var(--hair);color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><span>investikarus.com</span><span style="color:var(--accent)">↗</span></a>
+          <a data-row href="mailto:info@investikarus.com" style="display:flex;align-items:center;justify-content:space-between;min-height:52px;border-top:1px solid var(--hair);color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><span>info@investikarus.com</span><span style="color:var(--accent)">→</span></a>
+          <a data-row href="tel:+903125118300" style="display:flex;align-items:center;justify-content:space-between;min-height:52px;border-top:1px solid var(--hair);color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><span>+90 (312) 511 83 00</span><span style="color:var(--accent)">→</span></a>
+          <a data-row href="https://www.linkedin.com/company/i̇karus-yöneti̇m/?viewAsMember=true" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;min-height:52px;border-top:1px solid var(--hair);color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><span>LinkedIn</span><span style="color:var(--accent)">↗</span></a>
+          <a data-row href="https://www.instagram.com/ikarusyonetim?igsh=MzBuZzRuMnZyZ3h4" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;min-height:52px;border-top:1px solid var(--hair);color:var(--ink);font:500 14px/1.2 'Archivo',sans-serif"><span>Instagram</span><span style="color:var(--accent)">↗</span></a>
+        </div>
+
+        <button type="button" onClick="{{ acc }}" style="width:100%;border:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:transparent;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 0;cursor:pointer;text-align:left">
+          <span data-i18n="accOffices" style="font:400 30px/1 'Spectral',Georgia,serif;color:var(--head)">Ofisler</span>
+          <span data-glyph style="font:300 24px/1 'Archivo',sans-serif;color:var(--accent)">+</span>
+        </button>
+        <div data-open="0" style="display:none;padding-bottom:14px">
+          <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=Alacaatl%C4%B1+Mahallesi+3306%2F1+Sokak+No%3A9+06810+%C3%87ankaya+Ankara" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:3px 12px;padding:15px 0;border-bottom:1px solid var(--hair);color:var(--ink)"><span style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Ankara</span><span style="grid-row:2;font:400 12.5px/1.5 'Archivo',sans-serif;color:var(--muted);max-width:31ch">Alacaatlı Mahallesi 3306/1 Sokak No:9 06810 Çankaya-ANKARA</span><span style="grid-row:span 2;grid-column:2;align-self:center;color:var(--accent)">→</span></a>
+          <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=Emirgan+Mah.+Sak%C4%B1p+Sabanc%C4%B1+Cd.+No%3A36%2F10+Sar%C4%B1yer+%C4%B0stanbul" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:3px 12px;padding:15px 0;border-bottom:1px solid var(--hair);color:var(--ink)"><span style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">İstanbul</span><span style="grid-row:2;font:400 12.5px/1.5 'Archivo',sans-serif;color:var(--muted);max-width:31ch">Emirgan Mah. Sakıp Sabancı Cd. No:36/10 Sarıyer/İSTANBUL</span><span style="grid-row:span 2;grid-column:2;align-self:center;color:var(--accent)">→</span></a>
+          <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=48+Carnarvon+Road+E1B+2NU+London+UK" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:3px 12px;padding:15px 0;color:var(--ink)"><span data-i18n="london3" style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Londra</span><span style="grid-row:2;font:400 12.5px/1.5 'Archivo',sans-serif;color:var(--muted);max-width:31ch">48 Carnarvon Road, E1B 2NU, LONDON/UK</span><span style="grid-row:span 2;grid-column:2;align-self:center;color:var(--accent)">→</span></a>
+        </div>
+      </div>
+
+      <div style="padding:34px 26px 30px">
+        <img data-lightonly src="assets/ikarus-yazi-slogan.svg" alt="İkarus" style="width:130px;height:auto;display:block;opacity:.7">
+        <img data-darkonly src="assets/ikarus-yazi-slogan-beyaz.svg" alt="İkarus" style="width:130px;height:auto;display:block;opacity:.7">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+<p class="dv-next">Sırada denenebilir: “<a class="dv-oid" href="#2a">2a</a>'yı seç, ofis satırlarına adresi de koy” · “<a class="dv-oid" href="#2c">2c</a>'deki dev 08'i <a class="dv-oid" href="#2b">2b</a>'nin sekmeleriyle birleştir” · “kama motifini tamamen çıkar”</p>
+</section>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">QR karşılama sayfası — üç yön</span></div>
+
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:1180px;margin:0 0 30px;padding:20px 22px;background:#fff;border:1px solid rgba(15,34,67,.10);border-radius:10px">
+  <div>
+    <div style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#5C6B79;margin-bottom:9px">Varsayımlar</div>
+    <ul style="margin:0;padding:0;list-style:none;font:400 12px/1.6 'Archivo',sans-serif;color:#1B2733">
+      <li style="padding-left:13px;position:relative;margin-bottom:5px"><span style="position:absolute;left:2px;top:.62em;width:4px;height:4px;background:#189B93"></span>Sayfa QR'dan tek elle, ayakta ve aceleyle açılıyor: ilk ekranda son sayı ve arama/e-posta erişimi olmalı.</li>
+      <li style="padding-left:13px;position:relative;margin-bottom:5px"><span style="position:absolute;left:2px;top:.62em;width:4px;height:4px;background:#189B93"></span>Arşiv sayıları ve PDF bağlantıları şimdilik yer tutucu — gerçek dosya adlarını verince bağlarım.</li>
+      <li style="padding-left:13px;position:relative"><span style="position:absolute;left:2px;top:.62em;width:4px;height:4px;background:#189B93"></span>Bültenin basılı kimliği (kama, yaylar, Spectral başlık) ekranda da tanınmalı.</li>
+    </ul>
+  </div>
+  <div>
+    <div style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#5C6B79;margin-bottom:9px">Kararlar</div>
+    <ul style="margin:0;padding:0;list-style:none;font:400 12px/1.6 'Archivo',sans-serif;color:#1B2733">
+      <li style="padding-left:13px;position:relative;margin-bottom:5px"><span style="position:absolute;left:2px;top:.62em;width:4px;height:4px;background:#189B93"></span>Tek dosya, harici bağımlılık yok (yalnız Google Fonts) — GitHub Pages'te doğrudan çalışır.</li>
+      <li style="padding-left:13px;position:relative;margin-bottom:5px"><span style="position:absolute;left:2px;top:.62em;width:4px;height:4px;background:#189B93"></span>Tema sistemi izler, sağ üstteki ikili düğmeyle elle değişir. Dil TR/EN aynı yerde.</li>
+      <li style="padding-left:13px;position:relative"><span style="position:absolute;left:2px;top:.62em;width:4px;height:4px;background:#189B93"></span>Marka logolarını çizmedim: kanallar ad + ↗ ile veriliyor, sistemin tipografik diline uyuyor.</li>
+    </ul>
+  </div>
+  <div>
+    <div style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#5C6B79;margin-bottom:9px">Nasıl denenir</div>
+    <div style="font:400 12px/1.6 'Archivo',sans-serif;color:#1B2733">Her telefon gerçek sayfa: içinde kaydırın, sağ üstten <strong style="color:#0F2243">Açık / Koyu</strong> ve <strong style="color:#0F2243">TR / EN</strong> düğmelerine basın. Üç seçenek aynı içeriği taşır, farkı düzen ve tipografi ritminde.</div>
+    <div style="margin-top:11px;border:1px solid #CFE3E3;border-left:3px solid #189B93;background:#EFF7F7;padding:8px 10px">
+      <span style="display:inline-block;background:#116E68;color:#fff;font:600 8px/1 'Archivo',sans-serif;letter-spacing:.18em;text-transform:uppercase;padding:4px 6px;margin-bottom:5px">Not</span>
+      <div style="font:400 11.5px/1.5 'Archivo',sans-serif;color:#1B2733">Ofis adresleri ve iletişim bilgileri sizin verdiğiniz haliyle, değiştirilmeden kullanıldı.</div>
+    </div>
+  </div>
+</div>
+
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+  <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Kurumsal kama — kapak dilinin doğrudan ekran karşılığı</div>
+  <div class="dv-card" style="width:390px">
+    <div data-card data-theme="auto" style="width:390px;height:790px;overflow-y:auto;overflow-x:hidden;background:var(--bg);color:var(--ink);font:400 14px/1.55 'Archivo',sans-serif;-webkit-font-smoothing:antialiased">
+
+      <div style="position:relative;background:var(--bg);padding:20px 22px 0">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <img data-lightonly src="assets/ikarus-amblem.svg" alt="İkarus" style="height:30px;width:auto;display:block">
+            <img data-darkonly src="assets/ikarus-amblem-beyaz.svg" alt="İkarus" style="height:30px;width:auto;display:block">
+            <img data-lightonly src="assets/ikarus-yazi.svg" alt="İkarus" style="height:13px;width:auto;display:block">
+            <img data-darkonly src="assets/ikarus-yazi-beyaz.svg" alt="İkarus" style="height:13px;width:auto;display:block">
+          </div>
+          <div style="display:flex;gap:6px">
+            <div style="display:flex;border:1px solid var(--bd);border-radius:999px;overflow:hidden">
+              <button type="button" onClick="{{ themeLight }}" style="border:0;padding:7px 9px;background:transparent;color:var(--muted);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;min-height:32px">Açık</button>
+              <button type="button" onClick="{{ themeDark }}" style="border:0;padding:7px 9px;background:transparent;color:var(--muted);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;min-height:32px">Koyu</button>
+            </div>
+            <div style="display:flex;border:1px solid var(--bd);border-radius:999px;overflow:hidden">
+              <button type="button" onClick="{{ langTr }}" style="border:0;padding:7px 9px;background:var(--accent);color:var(--on-accent);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.08em;cursor:pointer;min-height:32px">TR</button>
+              <button type="button" onClick="{{ langEn }}" style="border:0;padding:7px 9px;background:transparent;color:var(--muted);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.08em;cursor:pointer;min-height:32px">EN</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:relative;height:186px;margin-top:16px;overflow:hidden">
+        <div style="position:absolute;inset:0;background:var(--accent);clip-path:polygon(0 100%,100% 100%,100% 18%,0 52%)"></div>
+        <svg data-arcs viewBox="0 0 390 186" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+          <g fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="0.9">
+            <path d="M-10 128 C 90 92, 230 128, 400 160"></path>
+            <path d="M-10 146 C 92 110, 232 146, 400 176"></path>
+          </g>
+        </svg>
+        <div style="position:absolute;left:22px;bottom:18px;right:22px;display:grid;gap:5px">
+          <div style="font:700 34px/1 'Quicksand',sans-serif;letter-spacing:.02em;color:#fff">BÜLTEN</div>
+          <div data-i18n="issue08" style="font:600 11px/1 'Archivo',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.9)">Ağustos 2026 · Sayı 08</div>
+        </div>
+      </div>
+
+      <div style="padding:24px 22px 0">
+        <div data-i18n="latest" style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Son sayı</div>
+        <div style="height:2px;background:linear-gradient(to right,var(--accent) 0,var(--accent) 44px,var(--rule) 44px,var(--rule) 100%);margin-bottom:14px"></div>
+        <div style="border-top:3px solid var(--accent);background:var(--surf);padding:15px 16px 16px">
+          <h2 data-i18n="aug" style="margin:0 0 6px;font:700 22px/1.15 'Spectral',Georgia,serif;color:var(--head)">Ağustos 2026 Bülteni</h2>
+          <p data-i18n="lead" style="margin:0 0 14px;font:400 13px/1.6 'Archivo',sans-serif;color:var(--ink)">Teşvik mevzuatındaki değişiklikler, proje bazlı destekler ve dönem içindeki başvuru takvimi.</p>
+          <a href="#" style="display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:0 16px;background:var(--accent);color:var(--on-accent);font:600 13.5px/1 'Archivo',sans-serif;letter-spacing:.02em">
+            <span data-i18n="openpdf">PDF olarak aç</span><span style="font-size:16px">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="padding:26px 22px 0">
+        <div data-i18n="past" style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Geçmiş sayılar</div>
+        <div style="height:2px;background:linear-gradient(to right,var(--accent) 0,var(--accent) 44px,var(--rule) 44px,var(--rule) 100%);margin-bottom:4px"></div>
+        <a data-row href="#" style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;border-bottom:1px solid var(--hair);color:var(--ink)">
+          <span style="display:grid;gap:2px"><span data-i18n="jul" style="font:600 14px/1.2 'Archivo',sans-serif;color:var(--head)">Temmuz 2026</span><span data-i18n="issue07" style="font:400 11.5px/1.2 'Archivo',sans-serif;color:var(--muted)">Sayı 07</span></span>
+          <span style="font:600 11px/1 'Archivo',sans-serif;letter-spacing:.1em;color:var(--accent-d)">PDF ↗</span>
+        </a>
+        <a data-row href="#" style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;border-bottom:1px solid var(--hair);color:var(--ink)">
+          <span style="display:grid;gap:2px"><span data-i18n="jun" style="font:600 14px/1.2 'Archivo',sans-serif;color:var(--head)">Haziran 2026</span><span data-i18n="issue06" style="font:400 11.5px/1.2 'Archivo',sans-serif;color:var(--muted)">Sayı 06</span></span>
+          <span style="font:600 11px/1 'Archivo',sans-serif;letter-spacing:.1em;color:var(--accent-d)">PDF ↗</span>
+        </a>
+        <a data-row href="#" style="display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;border-bottom:1px solid var(--hair);color:var(--ink)">
+          <span style="display:grid;gap:2px"><span data-i18n="may" style="font:600 14px/1.2 'Archivo',sans-serif;color:var(--head)">Mayıs 2026</span><span data-i18n="issue05" style="font:400 11.5px/1.2 'Archivo',sans-serif;color:var(--muted)">Sayı 05</span></span>
+          <span style="font:600 11px/1 'Archivo',sans-serif;letter-spacing:.1em;color:var(--accent-d)">PDF ↗</span>
+        </a>
+        <a data-row href="#" style="display:flex;align-items:center;min-height:46px;color:var(--accent-d);font:600 12px/1 'Archivo',sans-serif;letter-spacing:.04em"><span data-i18n="allissues">Tüm sayılar</span><span style="margin-left:6px">→</span></a>
+      </div>
+
+      <div style="padding:20px 22px 0">
+        <div data-i18n="contact" style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">İletişim</div>
+        <div style="height:2px;background:linear-gradient(to right,var(--accent) 0,var(--accent) 44px,var(--rule) 44px,var(--rule) 100%);margin-bottom:12px"></div>
+        <div style="display:grid;gap:8px">
+          <a data-row href="https://www.investikarus.com/index.html" target="_blank" rel="noopener" style="display:grid;gap:2px;border-left:2px solid var(--accent);padding:8px 10px;background:var(--surf);min-height:48px;align-content:center">
+            <span data-i18n="web" style="font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Web sitesi</span>
+            <span style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">investikarus.com ↗</span>
+          </a>
+          <a data-row href="mailto:info@investikarus.com" style="display:grid;gap:2px;border-left:2px solid var(--accent);padding:8px 10px;background:var(--surf);min-height:48px;align-content:center">
+            <span data-i18n="mail" style="font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">E-posta</span>
+            <span style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">info@investikarus.com</span>
+          </a>
+          <a data-row href="tel:+903125118300" style="display:grid;gap:2px;border-left:2px solid var(--accent);padding:8px 10px;background:var(--surf);min-height:48px;align-content:center">
+            <span data-i18n="phone" style="font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Telefon</span>
+            <span style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">+90 (312) 511 83 00</span>
+          </a>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <a data-row href="https://www.linkedin.com/company/i̇karus-yöneti̇m/?viewAsMember=true" target="_blank" rel="noopener" style="display:grid;gap:2px;border-left:2px solid var(--accent);padding:8px 10px;background:var(--surf);min-height:48px;align-content:center">
+              <span style="font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">LinkedIn</span>
+              <span style="font:500 13px/1.3 'Archivo',sans-serif;color:var(--head)">İkarus Yönetim ↗</span>
+            </a>
+            <a data-row href="https://www.instagram.com/ikarusyonetim?igsh=MzBuZzRuMnZyZ3h4" target="_blank" rel="noopener" style="display:grid;gap:2px;border-left:2px solid var(--accent);padding:8px 10px;background:var(--surf);min-height:48px;align-content:center">
+              <span style="font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Instagram</span>
+              <span style="font:500 13px/1.3 'Archivo',sans-serif;color:var(--head)">@ikarusyonetim ↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:26px 22px 0">
+        <div data-i18n="offices" style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Ofisler</div>
+        <div style="height:2px;background:linear-gradient(to right,var(--accent) 0,var(--accent) 44px,var(--rule) 44px,var(--rule) 100%);margin-bottom:12px"></div>
+        <div style="display:grid;gap:10px">
+          <div style="border:1px solid var(--bd);border-top:3px solid var(--accent);background:var(--surf);padding:12px 13px 13px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:5px">
+              <span style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Ankara</span>
+              <span data-i18n="hq" style="font:600 8.5px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--on-accent);background:var(--accent-d);padding:4px 6px">Merkez</span>
+            </div>
+            <div style="font:400 12.5px/1.55 'Archivo',sans-serif;color:var(--muted);margin-bottom:9px">Alacaatlı Mahallesi 3306/1 Sokak No:9 06810 Çankaya-ANKARA</div>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Alacaatl%C4%B1+Mahallesi+3306%2F1+Sokak+No%3A9+06810+%C3%87ankaya+Ankara" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:36px;font:600 12px/1 'Archivo',sans-serif;color:var(--accent-d)"><span data-i18n="openmap">Haritada aç</span><span style="margin-left:6px">→</span></a>
+          </div>
+          <div style="border:1px solid var(--bd);border-top:3px solid var(--head);background:var(--surf);padding:12px 13px 13px">
+            <div style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head);margin-bottom:5px">İstanbul</div>
+            <div style="font:400 12.5px/1.55 'Archivo',sans-serif;color:var(--muted);margin-bottom:9px">Emirgan Mah. Sakıp Sabancı Cd. No:36/10 Sarıyer/İSTANBUL</div>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Emirgan+Mah.+Sak%C4%B1p+Sabanc%C4%B1+Cd.+No%3A36%2F10+Sar%C4%B1yer+%C4%B0stanbul" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:36px;font:600 12px/1 'Archivo',sans-serif;color:var(--accent-d)"><span data-i18n="openmap2">Haritada aç</span><span style="margin-left:6px">→</span></a>
+          </div>
+          <div style="border:1px solid var(--bd);border-top:3px solid var(--accent);background:var(--surf);padding:12px 13px 13px">
+            <div style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head);margin-bottom:5px"><span data-i18n="london">Londra</span></div>
+            <div style="font:400 12.5px/1.55 'Archivo',sans-serif;color:var(--muted);margin-bottom:9px">48 Carnarvon Road, E1B 2NU, LONDON/UK</div>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=48+Carnarvon+Road+E1B+2NU+London+UK" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:36px;font:600 12px/1 'Archivo',sans-serif;color:var(--accent-d)"><span data-i18n="openmap3">Haritada aç</span><span style="margin-left:6px">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:28px;position:relative;background:var(--navy-surf);padding:22px 22px 24px;overflow:hidden">
+        <div style="position:absolute;inset:0;clip-path:polygon(0 0,100% 0,100% 34%,0 68%);background:var(--accent);opacity:.9"></div>
+        <div style="position:relative;display:grid;gap:14px;padding-top:36px">
+          <img src="assets/ikarus-yazi-slogan-beyaz.svg" alt="İkarus — Management Investment Training" style="width:170px;height:auto;display:block">
+          <div data-i18n="footnote" style="font:400 11.5px/1.6 'Archivo',sans-serif;color:rgba(255,255,255,.7)">Bu sayfa bültenin arkasındaki QR kodundan gelenler için hazırlandı.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="dv-opt" id="1b">
+  <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Amblem odaklı — koyu kapak, yatay kaydırmalı arşiv ve ofisler</div>
+  <div class="dv-card" style="width:390px">
+    <div data-card data-theme="auto" style="width:390px;height:790px;overflow-y:auto;overflow-x:hidden;background:var(--bg);color:var(--ink);font:400 14px/1.55 'Archivo',sans-serif;-webkit-font-smoothing:antialiased">
+
+      <div style="position:relative;background:var(--navy-surf);overflow:hidden;padding:18px 22px 26px">
+        <img src="assets/ikarus-amblem-beyaz.svg" alt="" style="position:absolute;right:-74px;bottom:-96px;width:290px;height:auto;opacity:.09;pointer-events:none">
+        <svg data-arcs viewBox="0 0 390 330" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+          <g fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="0.9">
+            <path d="M-10 250 C 100 206, 240 246, 400 286"></path>
+            <path d="M-10 272 C 102 226, 242 266, 400 306"></path>
+          </g>
+        </svg>
+        <div style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:34px">
+          <img src="assets/ikarus-yazi-beyaz.svg" alt="İkarus" style="height:14px;width:auto;display:block">
+          <div style="display:flex;gap:6px">
+            <div data-onnavy style="display:flex;border:1px solid rgba(255,255,255,.22);border-radius:999px;overflow:hidden">
+              <button type="button" onClick="{{ themeLight }}" style="border:0;padding:7px 9px;background:transparent;color:rgba(255,255,255,.72);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;min-height:32px">Açık</button>
+              <button type="button" onClick="{{ themeDark }}" style="border:0;padding:7px 9px;background:transparent;color:rgba(255,255,255,.72);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;min-height:32px">Koyu</button>
+            </div>
+            <div data-onnavy style="display:flex;border:1px solid rgba(255,255,255,.22);border-radius:999px;overflow:hidden">
+              <button type="button" onClick="{{ langTr }}" style="border:0;padding:7px 9px;background:#fff;color:#0F2243;font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.08em;cursor:pointer;min-height:32px">TR</button>
+              <button type="button" onClick="{{ langEn }}" style="border:0;padding:7px 9px;background:transparent;color:rgba(255,255,255,.72);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.08em;cursor:pointer;min-height:32px">EN</button>
+            </div>
+          </div>
+        </div>
+        <div style="position:relative;display:grid;gap:9px">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <span style="font:700 13px/1 'Quicksand',sans-serif;letter-spacing:.34em;color:var(--accent)">BÜLTEN</span>
+            <span style="flex:1;height:1px;background:rgba(255,255,255,.2)"></span>
+            <span style="font:600 34px/1 'Spectral',Georgia,serif;color:#fff">08</span>
+          </div>
+          <h2 data-i18n="aug" style="margin:0;font:700 32px/1.1 'Spectral',Georgia,serif;color:#fff">Ağustos 2026 Bülteni</h2>
+          <p data-i18n="lead" style="margin:0;font:400 13px/1.6 'Archivo',sans-serif;color:rgba(255,255,255,.72)">Teşvik mevzuatındaki değişiklikler, proje bazlı destekler ve dönem içindeki başvuru takvimi.</p>
+          <div style="display:flex;gap:9px;margin-top:6px">
+            <a href="#" style="flex:1;display:flex;align-items:center;justify-content:center;min-height:48px;background:var(--accent);color:#04222A;font:600 13.5px/1 'Archivo',sans-serif"><span data-i18n="openpdf2">PDF olarak aç</span></a>
+            <a href="tel:+903125118300" style="display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 18px;border:1px solid rgba(255,255,255,.3);color:#fff;font:600 13.5px/1 'Archivo',sans-serif"><span data-i18n="call">Arayın</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:22px 0 0">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;padding:0 22px;margin-bottom:11px">
+          <span data-i18n="past2" style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)">Geçmiş sayılar</span>
+          <a href="#" data-i18n="allissues2" style="font:600 11px/1 'Archivo',sans-serif;color:var(--accent-d)">Tüm sayılar →</a>
+        </div>
+        <div style="display:flex;gap:11px;overflow-x:auto;padding:0 22px 6px;scroll-snap-type:x mandatory">
+          <a href="#" style="flex:0 0 148px;scroll-snap-align:start;border:1px solid var(--bd);border-top:3px solid var(--accent);background:var(--surf);padding:12px 13px 14px;color:var(--ink)">
+            <div style="font:600 26px/1 'Spectral',Georgia,serif;color:var(--accent);margin-bottom:8px">07</div>
+            <div data-i18n="jul2" style="font:600 13.5px/1.25 'Archivo',sans-serif;color:var(--head)">Temmuz 2026</div>
+            <div style="margin-top:9px;font:600 10.5px/1 'Archivo',sans-serif;letter-spacing:.1em;color:var(--accent-d)">PDF ↗</div>
+          </a>
+          <a href="#" style="flex:0 0 148px;scroll-snap-align:start;border:1px solid var(--bd);border-top:3px solid var(--head);background:var(--surf);padding:12px 13px 14px;color:var(--ink)">
+            <div style="font:600 26px/1 'Spectral',Georgia,serif;color:var(--head);margin-bottom:8px">06</div>
+            <div data-i18n="jun2" style="font:600 13.5px/1.25 'Archivo',sans-serif;color:var(--head)">Haziran 2026</div>
+            <div style="margin-top:9px;font:600 10.5px/1 'Archivo',sans-serif;letter-spacing:.1em;color:var(--accent-d)">PDF ↗</div>
+          </a>
+          <a href="#" style="flex:0 0 148px;scroll-snap-align:start;border:1px solid var(--bd);border-top:3px solid var(--accent);background:var(--surf);padding:12px 13px 14px;color:var(--ink)">
+            <div style="font:600 26px/1 'Spectral',Georgia,serif;color:var(--accent);margin-bottom:8px">05</div>
+            <div data-i18n="may2" style="font:600 13.5px/1.25 'Archivo',sans-serif;color:var(--head)">Mayıs 2026</div>
+            <div style="margin-top:9px;font:600 10.5px/1 'Archivo',sans-serif;letter-spacing:.1em;color:var(--accent-d)">PDF ↗</div>
+          </a>
+        </div>
+      </div>
+
+      <div style="padding:24px 22px 0">
+        <div data-i18n="contact2" style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">İletişim</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <a data-row href="https://www.investikarus.com/index.html" target="_blank" rel="noopener" style="grid-column:span 2;display:flex;align-items:center;justify-content:space-between;gap:10px;border-left:2px solid var(--accent);background:var(--surf);padding:10px 12px;min-height:52px;color:var(--ink)">
+            <span style="display:grid;gap:2px"><span data-i18n="web2" style="font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Web sitesi</span><span style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">investikarus.com</span></span>
+            <span style="color:var(--accent-d);font-size:15px">↗</span>
+          </a>
+          <a data-row href="mailto:info@investikarus.com" style="grid-column:span 2;display:flex;align-items:center;justify-content:space-between;gap:10px;border-left:2px solid var(--accent);background:var(--surf);padding:10px 12px;min-height:52px;color:var(--ink)">
+            <span style="display:grid;gap:2px"><span data-i18n="mail2" style="font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">E-posta</span><span style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">info@investikarus.com</span></span>
+            <span style="color:var(--accent-d);font-size:15px">→</span>
+          </a>
+          <a data-row href="tel:+903125118300" style="display:grid;gap:2px;border-left:2px solid var(--accent);background:var(--surf);padding:10px 12px;min-height:52px;align-content:center;color:var(--ink)">
+            <span data-i18n="phone2" style="font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Telefon</span>
+            <span style="font:500 13px/1.3 'Archivo',sans-serif;color:var(--head)">+90 312 511 83 00</span>
+          </a>
+          <a data-row href="https://www.linkedin.com/company/i̇karus-yöneti̇m/?viewAsMember=true" target="_blank" rel="noopener" style="display:grid;gap:2px;border-left:2px solid var(--accent);background:var(--surf);padding:10px 12px;min-height:52px;align-content:center;color:var(--ink)">
+            <span style="font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">LinkedIn</span>
+            <span style="font:500 13px/1.3 'Archivo',sans-serif;color:var(--head)">İkarus Yönetim ↗</span>
+          </a>
+          <a data-row href="https://www.instagram.com/ikarusyonetim?igsh=MzBuZzRuMnZyZ3h4" target="_blank" rel="noopener" style="grid-column:span 2;display:grid;gap:2px;border-left:2px solid var(--accent);background:var(--surf);padding:10px 12px;min-height:52px;align-content:center;color:var(--ink)">
+            <span style="font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">Instagram</span>
+            <span style="font:500 13px/1.3 'Archivo',sans-serif;color:var(--head)">@ikarusyonetim ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="padding:24px 0 0">
+        <div data-i18n="offices2" style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:0 22px;margin-bottom:10px">Ofisler</div>
+        <div style="display:flex;gap:11px;overflow-x:auto;padding:0 22px 8px;scroll-snap-type:x mandatory">
+          <div style="flex:0 0 230px;scroll-snap-align:start;background:var(--surf);border:1px solid var(--bd);padding:13px 14px 14px">
+            <div style="display:flex;align-items:baseline;gap:9px;margin-bottom:7px">
+              <span style="font:600 30px/1 'Spectral',Georgia,serif;color:var(--accent)">01</span>
+              <span style="display:grid"><span style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Ankara</span><span data-i18n="hq2" style="font:600 8.5px/1.4 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-d)">Merkez ofis</span></span>
+            </div>
+            <div style="font:400 12px/1.55 'Archivo',sans-serif;color:var(--muted);margin-bottom:9px;min-height:56px">Alacaatlı Mahallesi 3306/1 Sokak No:9 06810 Çankaya-ANKARA</div>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Alacaatl%C4%B1+Mahallesi+3306%2F1+Sokak+No%3A9+06810+%C3%87ankaya+Ankara" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:42px;background:var(--surf2);color:var(--accent-d);font:600 12px/1 'Archivo',sans-serif"><span data-i18n="directions">Yol tarifi</span><span style="margin-left:6px">→</span></a>
+          </div>
+          <div style="flex:0 0 230px;scroll-snap-align:start;background:var(--surf);border:1px solid var(--bd);padding:13px 14px 14px">
+            <div style="display:flex;align-items:baseline;gap:9px;margin-bottom:7px">
+              <span style="font:600 30px/1 'Spectral',Georgia,serif;color:var(--head)">02</span>
+              <span style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">İstanbul</span>
+            </div>
+            <div style="font:400 12px/1.55 'Archivo',sans-serif;color:var(--muted);margin-bottom:9px;min-height:56px">Emirgan Mah. Sakıp Sabancı Cd. No:36/10 Sarıyer/İSTANBUL</div>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Emirgan+Mah.+Sak%C4%B1p+Sabanc%C4%B1+Cd.+No%3A36%2F10+Sar%C4%B1yer+%C4%B0stanbul" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:42px;background:var(--surf2);color:var(--accent-d);font:600 12px/1 'Archivo',sans-serif"><span data-i18n="directions2">Yol tarifi</span><span style="margin-left:6px">→</span></a>
+          </div>
+          <div style="flex:0 0 230px;scroll-snap-align:start;background:var(--surf);border:1px solid var(--bd);padding:13px 14px 14px">
+            <div style="display:flex;align-items:baseline;gap:9px;margin-bottom:7px">
+              <span style="font:600 30px/1 'Spectral',Georgia,serif;color:var(--accent)">03</span>
+              <span data-i18n="london2" style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Londra</span>
+            </div>
+            <div style="font:400 12px/1.55 'Archivo',sans-serif;color:var(--muted);margin-bottom:9px;min-height:56px">48 Carnarvon Road, E1B 2NU, LONDON/UK</div>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=48+Carnarvon+Road+E1B+2NU+London+UK" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:42px;background:var(--surf2);color:var(--accent-d);font:600 12px/1 'Archivo',sans-serif"><span data-i18n="directions3">Yol tarifi</span><span style="margin-left:6px">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:24px;padding:20px 22px 26px;border-top:2px solid var(--accent);background:var(--surf)">
+        <img data-lightonly src="assets/ikarus-yazi-slogan.svg" alt="İkarus — Management Investment Training" style="width:160px;height:auto;display:block;margin-bottom:11px">
+        <img data-darkonly src="assets/ikarus-yazi-slogan-beyaz.svg" alt="İkarus — Management Investment Training" style="width:160px;height:auto;display:block;margin-bottom:11px">
+        <div data-i18n="footnote2" style="font:400 11.5px/1.6 'Archivo',sans-serif;color:var(--muted)">Bu sayfa bültenin arkasındaki QR kodundan gelenler için hazırlandı.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="dv-opt" id="1c">
+  <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Sade çizgisel akış — kama yok, ritim çizgiyle kuruluyor</div>
+  <div class="dv-card" style="width:390px">
+    <div data-card data-theme="auto" style="width:390px;height:790px;overflow-y:auto;overflow-x:hidden;background:var(--bg);color:var(--ink);font:400 14px/1.55 'Archivo',sans-serif;-webkit-font-smoothing:antialiased">
+
+      <div style="padding:20px 24px 0">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <img data-lightonly src="assets/ikarus-yazi.svg" alt="İkarus" style="height:12px;width:auto;display:block">
+          <img data-darkonly src="assets/ikarus-yazi-beyaz.svg" alt="İkarus" style="height:12px;width:auto;display:block">
+          <div style="display:flex;gap:14px;align-items:center">
+            <div style="display:flex;gap:2px">
+              <button type="button" onClick="{{ themeLight }}" style="border:0;padding:8px 6px;background:transparent;color:var(--muted);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:34px">Açık</button>
+              <span style="align-self:center;width:1px;height:11px;background:var(--rule)"></span>
+              <button type="button" onClick="{{ themeDark }}" style="border:0;padding:8px 6px;background:transparent;color:var(--muted);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:34px">Koyu</button>
+            </div>
+            <div style="display:flex;gap:2px">
+              <button type="button" onClick="{{ langTr }}" style="border:0;padding:8px 6px;background:transparent;color:var(--accent-d);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.12em;cursor:pointer;min-height:34px">TR</button>
+              <span style="align-self:center;width:1px;height:11px;background:var(--rule)"></span>
+              <button type="button" onClick="{{ langEn }}" style="border:0;padding:8px 6px;background:transparent;color:var(--muted);font:600 9.5px/1 'Archivo',sans-serif;letter-spacing:.12em;cursor:pointer;min-height:34px">EN</button>
+            </div>
+          </div>
+        </div>
+        <div style="height:1px;background:var(--rule);margin:14px 0 30px"></div>
+        <h1 data-i18n="h1" style="margin:0 0 12px;font:400 38px/1.06 'Spectral',Georgia,serif;color:var(--head);letter-spacing:-.01em;text-wrap:pretty">Bülten<br>&amp; bağlantılar</h1>
+        <p data-i18n="intro" style="margin:0 0 4px;font:400 13.5px/1.65 'Archivo',sans-serif;color:var(--muted);max-width:29ch">Bültenin dijital arşivi, iletişim kanalları ve ofis adresleri tek sayfada.</p>
+      </div>
+
+      <div style="padding:34px 24px 0">
+        <div data-i18n="latest3" style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);margin-bottom:14px">Son sayı</div>
+        <a data-row href="#" style="display:grid;grid-template-columns:auto 1fr auto;gap:0 16px;align-items:baseline;padding-bottom:16px;border-bottom:2px solid var(--accent);color:var(--ink)">
+          <span style="font:600 44px/.9 'Spectral',Georgia,serif;color:var(--accent)">08</span>
+          <span style="display:grid;gap:3px">
+            <span data-i18n="aug3" style="font:600 17px/1.2 'Spectral',Georgia,serif;color:var(--head)">Ağustos 2026</span>
+            <span data-i18n="leadshort" style="font:400 12.5px/1.5 'Archivo',sans-serif;color:var(--muted)">Teşvik mevzuatı, proje bazlı destekler, başvuru takvimi</span>
+          </span>
+          <span style="font-size:19px;color:var(--accent);align-self:center">→</span>
+        </a>
+        <div style="display:grid">
+          <a data-row href="#" style="display:grid;grid-template-columns:auto 1fr auto;gap:0 16px;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span style="font:400 20px/1 'Spectral',Georgia,serif;color:var(--muted);width:44px">07</span>
+            <span data-i18n="jul3" style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">Temmuz 2026</span>
+            <span style="font-size:15px;color:var(--muted)">→</span>
+          </a>
+          <a data-row href="#" style="display:grid;grid-template-columns:auto 1fr auto;gap:0 16px;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span style="font:400 20px/1 'Spectral',Georgia,serif;color:var(--muted);width:44px">06</span>
+            <span data-i18n="jun3" style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">Haziran 2026</span>
+            <span style="font-size:15px;color:var(--muted)">→</span>
+          </a>
+          <a data-row href="#" style="display:grid;grid-template-columns:auto 1fr auto;gap:0 16px;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span style="font:400 20px/1 'Spectral',Georgia,serif;color:var(--muted);width:44px">05</span>
+            <span data-i18n="may3" style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">Mayıs 2026</span>
+            <span style="font-size:15px;color:var(--muted)">→</span>
+          </a>
+          <a data-row href="#" style="display:flex;align-items:center;min-height:50px;color:var(--accent-d);font:600 12px/1 'Archivo',sans-serif;letter-spacing:.04em"><span data-i18n="allissues3">Tüm sayılar</span><span style="margin-left:6px">→</span></a>
+        </div>
+      </div>
+
+      <div style="padding:26px 24px 0">
+        <div data-i18n="contact3" style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);margin-bottom:6px">İletişim</div>
+        <div style="display:grid">
+          <a data-row href="https://www.investikarus.com/index.html" target="_blank" rel="noopener" style="display:grid;grid-template-columns:78px 1fr auto;gap:0 12px;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span data-i18n="web3" style="font:600 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)">Web</span>
+            <span style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">investikarus.com</span>
+            <span style="font-size:14px;color:var(--accent)">↗</span>
+          </a>
+          <a data-row href="mailto:info@investikarus.com" style="display:grid;grid-template-columns:78px 1fr auto;gap:0 12px;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span data-i18n="mail3" style="font:600 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)">E-posta</span>
+            <span style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">info@investikarus.com</span>
+            <span style="font-size:14px;color:var(--accent)">→</span>
+          </a>
+          <a data-row href="tel:+903125118300" style="display:grid;grid-template-columns:78px 1fr auto;gap:0 12px;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span data-i18n="phone3" style="font:600 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)">Telefon</span>
+            <span style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">+90 (312) 511 83 00</span>
+            <span style="font-size:14px;color:var(--accent)">→</span>
+          </a>
+          <a data-row href="https://www.linkedin.com/company/i̇karus-yöneti̇m/?viewAsMember=true" target="_blank" rel="noopener" style="display:grid;grid-template-columns:78px 1fr auto;gap:0 12px;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span style="font:600 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)">LinkedIn</span>
+            <span style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">İkarus Yönetim</span>
+            <span style="font-size:14px;color:var(--accent)">↗</span>
+          </a>
+          <a data-row href="https://www.instagram.com/ikarusyonetim?igsh=MzBuZzRuMnZyZ3h4" target="_blank" rel="noopener" style="display:grid;grid-template-columns:78px 1fr auto;gap:0 12px;align-items:center;min-height:56px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span style="font:600 9.5px/1.3 'Archivo',sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)">Instagram</span>
+            <span style="font:500 14px/1.3 'Archivo',sans-serif;color:var(--head)">@ikarusyonetim</span>
+            <span style="font-size:14px;color:var(--accent)">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="padding:26px 24px 0">
+        <div data-i18n="offices3" style="font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-d);margin-bottom:6px">Ofisler</div>
+        <div style="display:grid">
+          <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=Alacaatl%C4%B1+Mahallesi+3306%2F1+Sokak+No%3A9+06810+%C3%87ankaya+Ankara" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:15px 0 16px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span style="display:flex;align-items:baseline;gap:9px"><span style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Ankara</span><span data-i18n="hq3" style="font:600 8.5px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-d)">Merkez</span></span>
+            <span style="grid-row:2;font:400 12.5px/1.55 'Archivo',sans-serif;color:var(--muted);max-width:31ch">Alacaatlı Mahallesi 3306/1 Sokak No:9 06810 Çankaya-ANKARA</span>
+            <span style="grid-row:span 2;grid-column:2;font-size:15px;color:var(--accent)">→</span>
+          </a>
+          <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=Emirgan+Mah.+Sak%C4%B1p+Sabanc%C4%B1+Cd.+No%3A36%2F10+Sar%C4%B1yer+%C4%B0stanbul" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:15px 0 16px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">İstanbul</span>
+            <span style="grid-row:2;font:400 12.5px/1.55 'Archivo',sans-serif;color:var(--muted);max-width:31ch">Emirgan Mah. Sakıp Sabancı Cd. No:36/10 Sarıyer/İSTANBUL</span>
+            <span style="grid-row:span 2;grid-column:2;font-size:15px;color:var(--accent)">→</span>
+          </a>
+          <a data-row href="https://www.google.com/maps/search/?api=1&amp;query=48+Carnarvon+Road+E1B+2NU+London+UK" target="_blank" rel="noopener" style="display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:15px 0 16px;border-bottom:1px solid var(--hair);color:var(--ink)">
+            <span data-i18n="london3" style="font:600 15px/1.2 'Archivo',sans-serif;color:var(--head)">Londra</span>
+            <span style="grid-row:2;font:400 12.5px/1.55 'Archivo',sans-serif;color:var(--muted);max-width:31ch">48 Carnarvon Road, E1B 2NU, LONDON/UK</span>
+            <span style="grid-row:span 2;grid-column:2;font-size:15px;color:var(--accent)">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="position:relative;margin-top:34px;padding:26px 24px 30px;overflow:hidden">
+        <svg data-arcs viewBox="0 0 390 140" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+          <g fill="none" stroke="var(--accent)" stroke-width="0.9" opacity="0.35">
+            <path d="M-10 96 C 100 56, 240 96, 400 132"></path>
+            <path d="M-10 116 C 102 76, 242 116, 400 152"></path>
+          </g>
+        </svg>
+        <div style="position:relative;display:grid;gap:12px">
+          <img data-lightonly src="assets/ikarus-yazi-slogan.svg" alt="İkarus — Management Investment Training" style="width:150px;height:auto;display:block">
+          <img data-darkonly src="assets/ikarus-yazi-slogan-beyaz.svg" alt="İkarus — Management Investment Training" style="width:150px;height:auto;display:block">
+          <div data-i18n="footnote3" style="font:400 11.5px/1.6 'Archivo',sans-serif;color:var(--muted);max-width:32ch">Bu sayfa bültenin arkasındaki QR kodundan gelenler için hazırlandı.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+
+<p class="dv-next">Sırada denenebilir: “<a class="dv-oid" href="#1c">1c</a>'nin sadeliği, ama <a class="dv-oid" href="#1a">1a</a>'nın kapak kaması” · “<a class="dv-oid" href="#1b">1b</a>'yi seç, gerçek PDF bağlantılarını bağla” · “ofislere küçük harita görseli ekle”</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#189B93&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#189B93&quot;,&quot;#116E68&quot;,&quot;#0F2243&quot;],&quot;section&quot;:&quot;Görünüm&quot;},&quot;defaultTheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;auto&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;light&quot;,&quot;dark&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Görünüm&quot;},&quot;showArcs&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Görünüm&quot;}}">
+const EN = {
+  issue08:'August 2026 · Issue 08', latest:'Latest issue', latest3:'Latest issue',
+  aug:'August 2026 Newsletter', aug3:'August 2026',
+  lead:'Changes in incentive legislation, project-based support schemes and the application calendar for the period.',
+  leadshort:'Incentive legislation, project-based support, application calendar',
+  openpdf:'Open as PDF', openpdf2:'Open as PDF', call:'Call',
+  past:'Past issues', past2:'Past issues',
+  jul:'July 2026', jun:'June 2026', may:'May 2026',
+  jul2:'July 2026', jun2:'June 2026', may2:'May 2026',
+  jul3:'July 2026', jun3:'June 2026', may3:'May 2026',
+  issue07:'Issue 07', issue06:'Issue 06', issue05:'Issue 05',
+  allissues:'All issues', allissues2:'All issues →', allissues3:'All issues',
+  contact:'Contact', contact2:'Contact', contact3:'Contact',
+  web:'Website', web2:'Website', web3:'Web',
+  mail:'E-mail', mail2:'E-mail', mail3:'E-mail',
+  phone:'Phone', phone2:'Phone', phone3:'Phone',
+  offices:'Offices', offices2:'Offices', offices3:'Offices',
+  hq:'Head', hq2:'Head office', hq3:'Head',
+  london:'London', london2:'London', london3:'London',
+  openmap:'Open in Maps', openmap2:'Open in Maps', openmap3:'Open in Maps',
+  directions:'Directions', directions2:'Directions', directions3:'Directions',
+  h1:'Newsletter\n& links',
+  intro:'The digital archive of the newsletter, contact channels and office addresses on a single page.',
+  footnote:'This page is for readers arriving from the QR code on the back of the newsletter.',
+  footnote2:'This page is for readers arriving from the QR code on the back of the newsletter.',
+  footnote3:'This page is for readers arriving from the QR code on the back of the newsletter.',
+  openissue:'Open latest issue', openissue2:'Open latest issue',
+  issue08b:'NEWSLETTER 08 · AUGUST 2026',
+  web4:'Website', mail4:'E-mail', phone4:'Phone', archive4:'Newsletter archive',
+  offices4:'Offices', london4:'London',
+  tabIssue:'Issue', tabContact:'Contact', tabOffices:'Offices',
+  accArchive:'Archive', accContact:'Contact', accOffices:'Offices'
+};
+
+class Component extends DCLogic {
+  componentDidMount() {
+    this.apply();
+    this.mq = window.matchMedia('(prefers-color-scheme: dark)');
+    this.onMq = () => this.paintThemePills();
+    this.mq.addEventListener('change', this.onMq);
+  }
+  componentWillUnmount() { if (this.mq) this.mq.removeEventListener('change', this.onMq); }
+  componentDidUpdate() { this.apply(); }
+
+  cards() { return Array.from(document.querySelectorAll('[data-card]')); }
+
+  apply() {
+    const accent = this.props.accent;
+    const theme = this.props.defaultTheme || 'auto';
+    const arcs = this.props.showArcs ?? true;
+    this.cards().forEach(c => {
+      if (accent && accent !== '#189B93') c.style.setProperty('--accent', accent);
+      else c.style.removeProperty('--accent');
+      c.dataset.theme = theme;
+      c.scrollTop = 0;
+    });
+    document.querySelectorAll('[data-arcs]').forEach(el => { el.style.display = arcs ? '' : 'none'; });
+    this.paintThemePills();
+  }
+
+  resolved(card) {
+    const t = card.dataset.theme;
+    if (t === 'dark' || t === 'light') return t;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  paintThemePills() {
+    this.cards().forEach(card => {
+      const dark = this.resolved(card) === 'dark';
+      const btns = Array.from(card.querySelectorAll('button')).filter(b => {
+        if (b.hasAttribute('data-tt') || b.hasAttribute('data-lt')) return false;
+        const t = b.textContent.trim();
+        return t === 'Açık' || t === 'Koyu';
+      });
+      btns.forEach(b => this.style(b, (b.textContent.trim() === 'Koyu') === dark));
+      const ic = card.querySelector('[data-ticon]');
+      if (ic) {
+        ic.innerHTML = dark
+          ? '<circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4 17 7M7 17l-1.6 1.6"></path>'
+          : '<path d="M20.2 14.6A8.4 8.4 0 0 1 9.4 3.8a8.4 8.4 0 1 0 10.8 10.8z"></path>';
+      }
+      const lt = card.querySelector('[data-lt]');
+      if (lt) lt.textContent = card.dataset.lang === 'en' ? 'TR' : 'EN';
+    });
+  }
+
+  themeToggle(e) {
+    const card = e.currentTarget.closest('[data-card]');
+    if (!card) return;
+    card.dataset.theme = this.resolved(card) === 'dark' ? 'light' : 'dark';
+    this.paintThemePills();
+  }
+
+  langToggle(e) {
+    const card = e.currentTarget.closest('[data-card]');
+    if (!card) return;
+    this.swapLang(card, card.dataset.lang === 'en' ? 'tr' : 'en');
+    this.paintThemePills();
+  }
+
+  swapLang(card, lang) {
+    card.dataset.lang = lang;
+    card.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (!el.dataset.tr) el.dataset.tr = el.innerHTML;
+      if (lang === 'en') {
+        const v = EN[key];
+        if (v) el.innerHTML = v.split('\n').join('<br>');
+      } else {
+        el.innerHTML = el.dataset.tr;
+      }
+    });
+  }
+
+  seg(e) {
+    const wrap = e.currentTarget.closest('[data-segwrap]');
+    const key = e.currentTarget.dataset.seg;
+    wrap.querySelectorAll('[data-seg]').forEach(b => {
+      const on = b.dataset.seg === key;
+      b.style.color = on ? 'var(--head)' : 'var(--muted)';
+      b.style.borderBottomColor = on ? 'var(--accent)' : 'transparent';
+    });
+    wrap.querySelectorAll('[data-panel]').forEach(p => {
+      const on = p.dataset.panel === key;
+      p.style.display = on ? '' : 'none';
+      if (on) { p.style.animation = 'none'; void p.offsetWidth; p.style.animation = 'ikrise .3s ease both'; }
+    });
+  }
+
+  acc(e) {
+    const btn = e.currentTarget;
+    const p = btn.nextElementSibling;
+    if (!p) return;
+    const open = p.dataset.open === '1';
+    p.dataset.open = open ? '0' : '1';
+    p.style.display = open ? 'none' : '';
+    if (!open) { p.style.animation = 'none'; void p.offsetWidth; p.style.animation = 'ikrise .28s ease both'; }
+    const g = btn.querySelector('[data-glyph]');
+    if (g) g.textContent = open ? '+' : '−';
+  }
+
+  style(btn, on) {
+    const onNavy = !!btn.closest('[data-onnavy]');
+    btn.style.background = on ? 'var(--accent)' : 'transparent';
+    btn.style.color = on ? 'var(--on-accent)' : (onNavy ? 'rgba(255,255,255,.72)' : 'var(--muted)');
+  }
+
+  setTheme(e, mode) {
+    const card = e.currentTarget.closest('[data-card]');
+    if (!card) return;
+    card.dataset.theme = mode;
+    this.paintThemePills();
+  }
+
+  setLang(e, lang) {
+    const card = e.currentTarget.closest('[data-card]');
+    if (!card) return;
+    this.swapLang(card, lang);
+    const wrap = e.currentTarget.parentElement;
+    const onNavy = !!wrap.hasAttribute('data-onnavy');
+    const pill = !!wrap.style.border || onNavy;
+    Array.from(wrap.querySelectorAll('button')).forEach(b => {
+      const on = b === e.currentTarget;
+      b.style.background = on ? (onNavy ? '#fff' : (pill ? 'var(--accent)' : 'transparent')) : 'transparent';
+      b.style.color = on
+        ? (onNavy ? '#0F2243' : (pill ? 'var(--on-accent)' : 'var(--accent-d)'))
+        : (onNavy ? 'rgba(255,255,255,.72)' : 'var(--muted)');
+    });
+  }
+
+  renderVals() {
+    return {
+      themeLight: e => this.setTheme(e, 'light'),
+      themeDark: e => this.setTheme(e, 'dark'),
+      langTr: e => this.setLang(e, 'tr'),
+      langEn: e => this.setLang(e, 'en'),
+      themeToggle: e => this.themeToggle(e),
+      langToggle: e => this.langToggle(e),
+      seg: e => this.seg(e),
+      acc: e => this.acc(e)
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<title>İkarus Bülten — Tasarım Sistemi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&amp;family=Archivo:wght@400;500;600;700&amp;family=Quicksand:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./doc-page.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+  doc-page{
+    --ik-accent:#189B93; --ik-navy:#0F2243; --ik-ink:#1B2733; --ik-muted:#5C6B79;
+    --ik-rule:#DCE3E9; --ik-tint:#EFF7F7; --ik-body:11pt; --ik-align:justify;
+    font-family:'Archivo',system-ui,sans-serif; font-size:var(--ik-body); line-height:1.56; color:var(--ik-ink);
+  }
+  doc-page > section.page{padding:0; display:flex; flex-direction:column}
+  h1,h2,h3,h4{font-family:'Spectral',Georgia,serif; margin:0; color:var(--ik-navy); font-weight:600}
+  p{margin:0 0 8pt; text-align:var(--ik-align); hyphens:auto}
+  strong{font-weight:600; color:var(--ik-navy)}
+  ul{margin:0 0 7pt; padding:0; list-style:none}
+  li{margin:0 0 4pt; padding-left:15pt; position:relative; text-align:var(--ik-align); hyphens:auto}
+  li::before{content:""; position:absolute; left:3pt; top:0.6em; width:4pt; height:4pt; background:var(--ik-accent)}
+  table{width:100%; border-collapse:collapse; margin:0 0 5pt; font-size:9.5pt; line-height:1.45}
+  thead th{background:var(--ik-navy); color:#fff; font-weight:600; text-align:left; padding:6pt 8pt; font-size:9pt; letter-spacing:0.02em}
+  td{padding:6pt 8pt; border-bottom:1px solid #E5EBF0; vertical-align:top}
+  tbody tr:nth-child(even) td{background:#F6FAFA}
+  a{color:#116E68; text-decoration:none}
+  a:hover{color:var(--ik-accent)}
+  figure{margin:0 0 12pt}
+  figcaption{font-size:8.5pt; color:var(--ik-muted); margin-top:6pt; text-align:center}
+</style>
+</helmet>
+
+<doc-page lang="tr" size="a4" margin="0">
+
+
+  <section class="page" data-screen-label="DS 01 Renk ve tipografi">
+    <div style="padding:0.4in 0.8in 0.16in; display:grid; row-gap:6pt">
+      <div style="display:flex; align-items:center; gap:9pt; white-space:nowrap; font:600 8pt/1 'Archivo',sans-serif; letter-spacing:0.18em; text-transform:uppercase; color:#0F2243">
+        <img src="assets/ikarus-yazi.svg" alt="ikarus" style="height: 9pt; width: auto; display: block; margin-left: -0.7px"><span style="font-size: 11px; line-height: 1; position: relative; top: 0.7px; left: -5px; height: 10px">Tasarım Sistemi</span><span style="font-size: 11px; line-height: 1; position: relative; top: 0.7px; margin-left: auto; height: 10px">Ağustos 2026</span>
+      </div>
+      <div style="height:2px; background:linear-gradient(to right,#189B93 0,#189B93 54pt,#DCE3E9 54pt,#DCE3E9 100%)"></div>
+    </div>
+    <div style="flex:1; min-height:0; padding:0.28in 0.8in 0">
+      <div style="display:grid; grid-template-columns:0.62in 1fr; gap:0 10pt; align-items:baseline; margin-bottom:8pt">
+        <div style="font:600 34pt/1 'Spectral',serif; color:#189B93">A</div>
+        <h2 style="font-size: 28pt; font-weight: 700; line-height: 1.14; white-space: nowrap">Renk ve Tipografi</h2>
+      </div>
+      <div style="height:2px; background:#189B93; margin-bottom:16pt"></div>
+      <p>Bu iki sayfa, bültenin görsel dilini kayıt altına alır: renkler, yazı ölçeği, sayfa yapısı ve tekrar eden bileşenler. Yeni bir sayı hazırlanırken bu değerler değişmeden kullanılır.</p>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin-bottom:7pt">Ana renkler</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12pt; margin-bottom:18pt">
+        <div>
+          <div style="height:34pt; background:#189B93; border:1px solid rgba(15,34,67,0.08)"></div>
+          <div style="font:600 9pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:6pt">Turkuaz</div>
+          <div style="font:400 8.5pt/1.3 'Archivo',sans-serif; color:#116E68; letter-spacing:0.04em">#189B93</div>
+          <div style="font:400 8.5pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:3pt">Bölüm çizgileri, numaralar, alt başlıklar, madde işaretleri, kapak kaması</div>
+        </div>
+        <div>
+          <div style="height:34pt; background:#116E68; border:1px solid rgba(15,34,67,0.08)"></div>
+          <div style="font:600 9pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:6pt">Koyu turkuaz</div>
+          <div style="font:400 8.5pt/1.3 'Archivo',sans-serif; color:#116E68; letter-spacing:0.04em">#116E68</div>
+          <div style="font:400 8.5pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:3pt">Bağlantılar, tablo grup satırı, sayfa numarası, NOT etiketi</div>
+        </div>
+        <div>
+          <div style="height:34pt; background:#0F2243; border:1px solid rgba(15,34,67,0.08)"></div>
+          <div style="font:600 9pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:6pt">Lacivert</div>
+          <div style="font:400 8.5pt/1.3 'Archivo',sans-serif; color:#116E68; letter-spacing:0.04em">#0F2243</div>
+          <div style="font:400 8.5pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:3pt">Başlıklar, tablo başlık satırı, kalın metin</div>
+        </div>
+        <div>
+          <div style="height:34pt; background:#1B2733; border:1px solid rgba(15,34,67,0.08)"></div>
+          <div style="font:600 9pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:6pt">Metin</div>
+          <div style="font:400 8.5pt/1.3 'Archivo',sans-serif; color:#116E68; letter-spacing:0.04em">#1B2733</div>
+          <div style="font:400 8.5pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:3pt">Gövde metni</div>
+        </div>
+      </div>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin-bottom:7pt">Yardımcı renkler</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12pt; margin-bottom:18pt">
+        <div>
+          <div style="height:34pt; background:#5C6B79; border:1px solid rgba(15,34,67,0.08)"></div>
+          <div style="font:600 9pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:6pt">Soluk metin</div>
+          <div style="font:400 8.5pt/1.3 'Archivo',sans-serif; color:#5C6B79; letter-spacing:0.04em">#5C6B79</div>
+          <div style="font:400 8.5pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:3pt">Şekil açıklamaları, küçük etiketler</div>
+        </div>
+        <div>
+          <div style="height:34pt; background:#DCE3E9; border:1px solid rgba(15,34,67,0.08)"></div>
+          <div style="font:600 9pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:6pt">Çizgi</div>
+          <div style="font:400 8.5pt/1.3 'Archivo',sans-serif; color:#5C6B79; letter-spacing:0.04em">#DCE3E9</div>
+          <div style="font:400 8.5pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:3pt">Üst ve alt bilgi çizgileri</div>
+        </div>
+        <div>
+          <div style="height:34pt; background:#EFF7F7; border:1px solid rgba(15,34,67,0.08)"></div>
+          <div style="font:600 9pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:6pt">Turkuaz zemin</div>
+          <div style="font:400 8.5pt/1.3 'Archivo',sans-serif; color:#5C6B79; letter-spacing:0.04em">#EFF7F7</div>
+          <div style="font:400 8.5pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:3pt">NOT kutusu, vurgu blokları</div>
+        </div>
+        <div>
+          <div style="height:34pt; background:#F6FAFA; border:1px solid rgba(15,34,67,0.08)"></div>
+          <div style="font:600 9pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:6pt">Açık zemin</div>
+          <div style="font:400 8.5pt/1.3 'Archivo',sans-serif; color:#5C6B79; letter-spacing:0.04em">#F6FAFA</div>
+          <div style="font:400 8.5pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:3pt">Tablo şeritleri, metrik kutuları</div>
+        </div>
+      </div>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin-bottom:7pt">Yazı aileleri</div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12pt">
+        <div style="border-top:3px solid #189B93; padding-top:9pt">
+          <div style="font:600 15pt/1.1 'Spectral',serif; color:#0F2243">Spectral</div>
+          <div style="font:400 8.5pt/1.45 'Archivo',sans-serif; color:#5C6B79; margin-top:4pt">400 · 500 · 600 · 700<br>Başlıklar, bölüm numaraları, metrik değerleri</div>
+        </div>
+        <div style="border-top:3px solid #189B93; padding-top:9pt">
+          <div style="font:600 15pt/1.1 'Archivo',sans-serif; color:#0F2243">Archivo</div>
+          <div style="font:400 8.5pt/1.45 'Archivo',sans-serif; color:#5C6B79; margin-top:4pt">400 · 500 · 600 · 700<br>Gövde metni, tablolar, etiketler, alt başlıklar</div>
+        </div>
+        <div style="border-top:3px solid #0F2243; padding-top:9pt">
+          <div style="font:600 15pt/1.1 'Quicksand',sans-serif; color:#0F2243">Quicksand</div>
+          <div style="font:400 8.5pt/1.45 'Archivo',sans-serif; color:#5C6B79; margin-top:4pt">500 · 600 · 700<br>Yalnızca kapak: “BÜLTEN” ve tırnak işaretleri</div>
+        </div>
+      </div>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin:18pt 0 7pt">Kapak ve arka kapak</div>
+      <div style="display:grid; grid-template-columns:1.35in 1fr; gap:10pt 14pt; align-items:start; font:400 9pt/1.5 'Archivo',sans-serif; color:#1B2733">
+        <div style="position:relative; height:1.9in; background:#FBFCFC; border:1px solid #E6ECF1; overflow:hidden">
+          <div style="position:absolute; inset:0; clip-path:polygon(0 100%, 100% 100%, 100% 80%, 0 46%); background:#189B93"></div>
+          <svg viewBox="0 0 130 182" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%">
+            <g fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.8">
+              <path d="M0 150 C 40 130, 90 152, 130 168"></path>
+              <path d="M0 160 C 42 141, 92 162, 130 176"></path>
+            </g>
+          </svg>
+        </div>
+        <div style="display:grid; gap:7pt">
+          <div><strong style="color:#0F2243">Turkuaz kama</strong> — kapakta soldan sağa yükselen tek kesim (%46 → %80); arka kapakta aynı açının aynası. İçine yalnızca beyaz metin girer.</div>
+          <div><strong style="color:#0F2243">Beyaz yaylar</strong> — eş merkezli, ince (0,8px) ve yarı saydam; hiçbir zaman yazının üzerinden geçmez.</div>
+          <div><strong style="color:#0F2243">Logo</strong> — kapakta lacivert “BÜLTEN” ile aynı genişlikte; arka kapakta sloganlı sürüm kullanılır.</div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:0.1in 0.8in 0.24in; display:grid; justify-items:center; row-gap:4pt">
+      <div style="justify-self:stretch; height:1px; background:#DCE3E9"></div>
+      <div>
+        <span style="font:400 8pt/1.3 'Archivo',sans-serif; letter-spacing:0.06em; color:#116E68">A</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-screen-label="DS 02 Ölçek ve bileşenler">
+    <div style="padding:0.4in 0.8in 0.16in; display:grid; row-gap:6pt">
+      <div style="display:flex; align-items:center; gap:9pt; white-space:nowrap; font:600 8pt/1 'Archivo',sans-serif; letter-spacing:0.18em; text-transform:uppercase; color:#0F2243">
+        <img src="assets/ikarus-yazi.svg" alt="ikarus" style="height: 9pt; width: auto; display: block; margin-left: -0.7px"><span style="font-size: 11px; line-height: 1; position: relative; top: 0.7px; left: -5px; height: 10px">Tasarım Sistemi</span><span style="font-size: 11px; line-height: 1; position: relative; top: 0.7px; margin-left: auto; height: 10px">Ağustos 2026</span>
+      </div>
+      <div style="height:2px; background:linear-gradient(to right,#189B93 0,#189B93 54pt,#DCE3E9 54pt,#DCE3E9 100%)"></div>
+    </div>
+    <div style="flex:1; min-height:0; padding:0.28in 0.8in 0">
+      <div style="display:grid; grid-template-columns:0.62in 1fr; gap:0 10pt; align-items:baseline; margin-bottom:8pt">
+        <div style="font:600 34pt/1 'Spectral',serif; color:#189B93">B</div>
+        <h2 style="font-size: 28pt; font-weight: 700; line-height: 1.14; white-space: nowrap">Ölçek ve Bileşenler</h2>
+      </div>
+      <div style="height:2px; background:#189B93; margin-bottom:16pt"></div>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin-bottom:7pt">Yazı ölçeği</div>
+      <div style="margin-bottom:16pt; border-top:1px solid #EDF1F5">
+        <div style="display:grid; grid-template-columns:1.75in 1fr; gap:0 12pt; align-items:baseline; padding:7pt 0; border-bottom:1px solid #EDF1F5">
+          <div style="font:400 8.5pt/1.35 'Archivo',sans-serif; color:#5C6B79">Bölüm numarası · Spectral 600 · 34pt</div>
+          <div style="font:600 34pt/1 'Spectral',serif; color:#189B93">01</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1.75in 1fr; gap:0 12pt; align-items:baseline; padding:7pt 0; border-bottom:1px solid #EDF1F5">
+          <div style="font:400 8.5pt/1.35 'Archivo',sans-serif; color:#5C6B79">Bölüm başlığı · Spectral 700 · 28pt</div>
+          <div style="font:700 28pt/1.05 'Spectral',serif; color:#0F2243">Proje Bazlı</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1.75in 1fr; gap:0 12pt; align-items:baseline; padding:7pt 0; border-bottom:1px solid #EDF1F5">
+          <div style="font:400 8.5pt/1.35 'Archivo',sans-serif; color:#5C6B79">Başlık eki · Archivo 300 · 11pt</div>
+          <div style="font:300 11pt/1 'Archivo',sans-serif; color:#8A97A3; letter-spacing:-0.05em">DEĞİŞİKLİKLER</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1.75in 1fr; gap:0 12pt; align-items:baseline; padding:7pt 0; border-bottom:1px solid #EDF1F5">
+          <div style="font:400 8.5pt/1.35 'Archivo',sans-serif; color:#5C6B79">Alt başlık · Archivo 600 · 11pt</div>
+          <div style="font:600 11pt/1.2 'Archivo',sans-serif; color:#189B93">1. Başvuru Süreci ve Fizibilite Raporu</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1.75in 1fr; gap:0 12pt; align-items:baseline; padding:7pt 0; border-bottom:1px solid #EDF1F5">
+          <div style="font:400 8.5pt/1.35 'Archivo',sans-serif; color:#5C6B79">Gövde · Archivo 400 · 11pt / 1,56 · iki yana yaslı</div>
+          <div style="font:400 11pt/1.56 'Archivo',sans-serif; color:#1B2733">Karar, kapsamlı değişiklikler yapmıştır.</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1.75in 1fr; gap:0 12pt; align-items:baseline; padding:7pt 0; border-bottom:1px solid #EDF1F5">
+          <div style="font:400 8.5pt/1.35 'Archivo',sans-serif; color:#5C6B79">Tablo · Archivo 400 · 9,5pt / 1,45</div>
+          <div style="font:400 9.5pt/1.45 'Archivo',sans-serif; color:#1B2733">Fırsat / Destek</div>
+        </div>
+        <div style="display:grid; grid-template-columns:1.75in 1fr; gap:0 12pt; align-items:baseline; padding:7pt 0; border-bottom:1px solid #EDF1F5">
+          <div style="font:400 8.5pt/1.35 'Archivo',sans-serif; color:#5C6B79">Şekil açıklaması · Archivo 400 · 8,5pt</div>
+          <div style="font:400 8.5pt/1.4 'Archivo',sans-serif; color:#5C6B79">Şekil 1. Müracaat toplama usulleri.</div>
+        </div>
+      </div>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin-bottom:7pt">Sayfa yapısı</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12pt; margin-bottom:16pt; font:400 9pt/1.5 'Archivo',sans-serif; color:#1B2733">
+        <div style="border-left:2px solid #189B93; padding:2pt 0 2pt 11pt">
+          <strong style="color:#0F2243">Sayfa</strong><br>A4 dikey · yan boşluk 0,8 inç · her başlık yeni sayfada başlamaz, akış korunur.
+        </div>
+        <div style="border-left:2px solid #189B93; padding:2pt 0 2pt 11pt">
+          <strong style="color:#0F2243">Üst bilgi</strong><br>Logo + BÜLTEN solda, AĞUSTOS 2026 sağda; altında 2px çizgi, ilk 54pt turkuaz.
+        </div>
+        <div style="border-left:2px solid #189B93; padding:2pt 0 2pt 11pt">
+          <strong style="color:#0F2243">Alt bilgi</strong><br>1px açık gri çizgi ve ortalanmış sayfa numarası. Numaralandırma ilk içerik sayfasından başlar.
+        </div>
+        <div style="border-left:2px solid #189B93; padding:2pt 0 2pt 11pt">
+          <strong style="color:#0F2243">Bölüm başlığı</strong><br>Numara 0,62 inçlik kolonda; başlık tek satır; altında 2px turkuaz çizgi.
+        </div>
+      </div>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin-bottom:7pt">Bileşenler</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12pt">
+        <div>
+          <div style="font:600 8.5pt/1.2 'Archivo',sans-serif; color:#0F2243; margin-bottom:5pt">Madde listesi</div>
+          <ul style="margin-bottom:0; font-size:9.5pt">
+            <li>Turkuaz 4pt kare işaret, 15pt girinti</li>
+            <li><strong>Kalın etiket:</strong> ardından açıklama</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font:600 8.5pt/1.2 'Archivo',sans-serif; color:#0F2243; margin-bottom:5pt">Metrik kutusu</div>
+          <div style="border-top:3px solid #189B93; background:#F6FAFA; padding:9pt 10pt">
+            <div style="font:600 7.5pt/1.25 'Archivo',sans-serif; letter-spacing:0.14em; text-transform:uppercase; color:#5C6B79; margin-bottom:5pt">Kredi üst limiti</div>
+            <div style="font:600 14pt/1.1 'Spectral',serif; color:#0F2243">20 milyon TL</div>
+          </div>
+        </div>
+        <div>
+          <div style="font:600 8.5pt/1.2 'Archivo',sans-serif; color:#0F2243; margin-bottom:5pt">Tablo</div>
+          <table style="margin:0; font-size:9pt">
+            <thead><tr><th>Fırsat</th><th>Fayda</th></tr></thead>
+            <tbody>
+              <tr><td colspan="2" style="background:#116E68; color:#fff; font:600 8.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.06em; padding:4pt 8pt">Grup satırı</td></tr>
+              <tr><td style="font-weight:600; color:#0F2243">Kupon</td><td>Yazılım, bulut, veri</td></tr>
+              <tr><td style="font-weight:600; color:#0F2243">Kredi</td><td>GPU işlem gücü</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div style="font:600 8.5pt/1.2 'Archivo',sans-serif; color:#0F2243; margin-bottom:5pt">NOT kutusu</div>
+          <div style="border:1px solid #CFE3E3; border-left:3px solid #189B93; background:#EFF7F7; padding:9pt 11pt 10pt">
+            <div style="display:inline-block; background:#116E68; color:#FFFFFF; font:600 7pt/1 'Archivo',sans-serif; letter-spacing:0.18em; text-transform:uppercase; padding:4pt 7pt; margin-bottom:6pt">Not</div>
+            <p style="margin:0; font-size:9pt">Şart ve istisnaların vurgulandığı bloklarda kullanılır.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:0.1in 0.8in 0.24in; display:grid; justify-items:center; row-gap:4pt">
+      <div style="justify-self:stretch; height:1px; background:#DCE3E9"></div>
+      <div>
+        <span style="font:400 8pt/1.3 'Archivo',sans-serif; letter-spacing:0.06em; color:#116E68">B</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-screen-label="DS 03 Şema ve kutular">
+    <div style="padding:0.4in 0.8in 0.16in; display:grid; row-gap:6pt">
+      <div style="display:flex; align-items:center; gap:9pt; white-space:nowrap; font:600 8pt/1 'Archivo',sans-serif; letter-spacing:0.18em; text-transform:uppercase; color:#0F2243">
+        <img src="assets/ikarus-yazi.svg" alt="ikarus" style="height: 9pt; width: auto; display: block; margin-left: -0.7px"><span style="font-size: 11px; line-height: 1; position: relative; top: 0.7px; left: -5px; height: 10px">Tasarım Sistemi</span><span style="font-size: 11px; line-height: 1; position: relative; top: 0.7px; margin-left: auto; height: 10px">Ağustos 2026</span>
+      </div>
+      <div style="height:2px; background:linear-gradient(to right,#189B93 0,#189B93 54pt,#DCE3E9 54pt,#DCE3E9 100%)"></div>
+    </div>
+    <div style="flex:1; min-height:0; padding:0.28in 0.8in 0">
+      <div style="display:grid; grid-template-columns:0.62in 1fr; gap:0 10pt; align-items:baseline; margin-bottom:8pt">
+        <div style="font:600 34pt/1 'Spectral',serif; color:#189B93">C</div>
+        <h2 style="font-size: 28pt; font-weight: 700; line-height: 1.14; white-space: nowrap">Şema ve Kutular</h2>
+      </div>
+      <div style="height:2px; background:#189B93; margin-bottom:14pt"></div>
+      <p style="margin-bottom:12pt">Şemalar tek renk ailesinden kurulur; sıralı ögelerde turkuaz ve lacivert dönüşümlü kullanılır. Her şema numaralandırılır ve altına ortalanmış açıklama yazılır.</p>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin:0 0 7pt">Şema dolgu renkleri (sırayla)</div>
+      <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:10pt; margin-bottom:14pt">
+        <div>
+          <div style="height:20pt; background:#0F2243"></div>
+          <div style="font:600 8pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:5pt">1. Lacivert</div>
+          <div style="font:400 8pt/1.3 'Archivo',sans-serif; color:#5C6B79; letter-spacing:0.03em">#0F2243</div>
+        </div>
+        <div>
+          <div style="height:20pt; background:#116E68"></div>
+          <div style="font:600 8pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:5pt">2. Koyu turkuaz</div>
+          <div style="font:400 8pt/1.3 'Archivo',sans-serif; color:#5C6B79; letter-spacing:0.03em">#116E68</div>
+        </div>
+        <div>
+          <div style="height:20pt; background:#189B93"></div>
+          <div style="font:600 8pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:5pt">3. Turkuaz</div>
+          <div style="font:400 8pt/1.3 'Archivo',sans-serif; color:#5C6B79; letter-spacing:0.03em">#189B93</div>
+        </div>
+        <div>
+          <div style="height:20pt; background:#33506F"></div>
+          <div style="font:600 8pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:5pt">4. Füme lacivert</div>
+          <div style="font:400 8pt/1.3 'Archivo',sans-serif; color:#5C6B79; letter-spacing:0.03em">#33506F</div>
+        </div>
+        <div>
+          <div style="height:20pt; background:#4F7F7B"></div>
+          <div style="font:600 8pt/1.3 'Archivo',sans-serif; color:#0F2243; margin-top:5pt">5. Soluk turkuaz</div>
+          <div style="font:400 8pt/1.3 'Archivo',sans-serif; color:#5C6B79; letter-spacing:0.03em">#4F7F7B</div>
+        </div>
+      </div>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin:0 0 7pt">Karşılaştırma kartı — iki seçenek</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10pt">
+        <div style="border:1px solid #CFE3E3; border-top:3px solid #189B93; background:#F8FCFC; padding:9pt 10pt">
+          <div style="font:600 9.5pt/1.2 'Archivo',sans-serif; color:#0F2243; margin-bottom:4pt">Çağrı usulü</div>
+          <div style="font-size:8.5pt; line-height:1.45; color:#3C4C5A">Turkuaz kart: 1px #CFE3E3 çerçeve, 3px #189B93 üst çizgi, #F8FCFC zemin.</div>
+        </div>
+        <div style="border:1px solid #CFD8E4; border-top:3px solid #0F2243; background:#F7F9FC; padding:9pt 10pt">
+          <div style="font:600 9.5pt/1.2 'Archivo',sans-serif; color:#0F2243; margin-bottom:4pt">Davet usulü</div>
+          <div style="font-size:8.5pt; line-height:1.45; color:#3C4C5A">Lacivert kart: 1px #CFD8E4 çerçeve, 3px #0F2243 üst çizgi, #F7F9FC zemin.</div>
+        </div>
+      </div>
+        <div style="font:400 8pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:5pt">Şekil A. İki seçenekli karşılaştırma; renkler eşit ağırlıkta durur.</div>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin:14pt 0 7pt">Adım zinciri — sıralı süreç</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8pt">
+        <div style="background:#F8FCFC; border:1px solid #E1EBEB; padding:8pt 9pt 10pt">
+          <div style="display:flex; align-items:center; gap:6pt; margin-bottom:6pt"><span style="width:17pt; height:17pt; border-radius:50%; background:#189B93; color:#fff; font:600 9pt/17pt 'Archivo',sans-serif; text-align:center">1</span><span style="flex:1; height:2px; background:#189B93"></span></div>
+          <div style="font-size:8.5pt; line-height:1.4; color:#26313C">Turkuaz adım</div>
+        </div>
+        <div style="background:#F8FAFC; border:1px solid #E3E9F0; padding:8pt 9pt 10pt">
+          <div style="display:flex; align-items:center; gap:6pt; margin-bottom:6pt"><span style="width:17pt; height:17pt; border-radius:50%; background:#0F2243; color:#fff; font:600 9pt/17pt 'Archivo',sans-serif; text-align:center">2</span><span style="flex:1; height:2px; background:#0F2243"></span></div>
+          <div style="font-size:8.5pt; line-height:1.4; color:#26313C">Lacivert adım</div>
+        </div>
+        <div style="background:#F8FCFC; border:1px solid #E1EBEB; padding:8pt 9pt 10pt">
+          <div style="display:flex; align-items:center; gap:6pt; margin-bottom:6pt"><span style="width:17pt; height:17pt; border-radius:50%; background:#189B93; color:#fff; font:600 9pt/17pt 'Archivo',sans-serif; text-align:center">3</span><span style="flex:1; height:2px; background:#189B93"></span></div>
+          <div style="font-size:8.5pt; line-height:1.4; color:#26313C">Dönüşümlü devam eder</div>
+        </div>
+        <div style="background:#F8FAFC; border:1px solid #E3E9F0; padding:8pt 9pt 10pt">
+          <div style="display:flex; align-items:center; gap:6pt; margin-bottom:6pt"><span style="width:17pt; height:17pt; border-radius:50%; background:#0F2243; color:#fff; font:600 9pt/17pt 'Archivo',sans-serif; text-align:center">4</span><span style="flex:1; height:2px; background:#0F2243"></span></div>
+          <div style="font-size:8.5pt; line-height:1.4; color:#26313C">En çok dört adım</div>
+        </div>
+      </div>
+        <div style="font:400 8pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:5pt">Şekil B. Adım zinciri: daire 17pt, yanında 2px çizgi; zemin ve çerçeve renge uyar.</div>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin:14pt 0 7pt">Kolon matrisi — başlık + ögeler</div>
+      <div style="display:grid; grid-template-columns:repeat(5,1fr); column-gap:6pt; row-gap:5pt">
+        <div style="grid-row:1; background:#0F2243; color:#fff; font:600 8pt/1.25 'Archivo',sans-serif; padding:7pt 6pt; text-align:center">Başlık 1</div>
+        <div style="grid-row:1; background:#116E68; color:#fff; font:600 8pt/1.25 'Archivo',sans-serif; padding:7pt 6pt; text-align:center">Başlık 2</div>
+        <div style="grid-row:1; background:#189B93; color:#fff; font:600 8pt/1.25 'Archivo',sans-serif; padding:7pt 6pt; text-align:center">Başlık 3</div>
+        <div style="grid-row:1; background:#33506F; color:#fff; font:600 8pt/1.25 'Archivo',sans-serif; padding:7pt 6pt; text-align:center">Başlık 4</div>
+        <div style="grid-row:1; background:#4F7F7B; color:#fff; font:600 8pt/1.25 'Archivo',sans-serif; padding:7pt 6pt; text-align:center">Başlık 5</div>
+        <div style="grid-row:2; display:grid; gap:4pt; align-content:start; font-size:8pt; line-height:1.35; color:#26313C"><div style="background:#F5F8F8; padding:5pt 6pt">Öge</div><div style="background:#F5F8F8; padding:5pt 6pt">Öge</div></div>
+        <div style="grid-row:2; display:grid; gap:4pt; align-content:start; font-size:8pt; line-height:1.35; color:#26313C"><div style="background:#F5F8F8; padding:5pt 6pt">Öge</div></div>
+        <div style="grid-row:2; display:grid; gap:4pt; align-content:start; font-size:8pt; line-height:1.35; color:#26313C"><div style="background:#F5F8F8; padding:5pt 6pt">Öge</div><div style="background:#F5F8F8; padding:5pt 6pt">Öge</div></div>
+        <div style="grid-row:2; display:grid; gap:4pt; align-content:start; font-size:8pt; line-height:1.35; color:#26313C"><div style="background:#F5F8F8; padding:5pt 6pt">Öge</div></div>
+        <div style="grid-row:2; display:grid; gap:4pt; align-content:start; font-size:8pt; line-height:1.35; color:#26313C"><div style="background:#F5F8F8; padding:5pt 6pt">Öge</div></div>
+      </div>
+        <div style="font:400 8pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:5pt">Şekil C. Kolon matrisi: başlık hücreleri dolu renk, ögeler #F5F8F8 zeminde.</div>
+
+      <div style="font:600 7.5pt/1.2 'Archivo',sans-serif; letter-spacing:0.16em; text-transform:uppercase; color:#5C6B79; margin:14pt 0 7pt">Etiket ızgarası ve kod bloğu</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10pt; align-items:start">
+        <div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:5pt">
+            <div style="border-left:2px solid #189B93; background:#F6FAFA; padding:6pt 8pt; font-size:8.5pt; line-height:1.35">Tematik etiket</div>
+            <div style="border-left:2px solid #189B93; background:#F6FAFA; padding:6pt 8pt; font-size:8.5pt; line-height:1.35">2px sol çizgi</div>
+          </div>
+        <div style="font:400 8pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:5pt">Şekil D. Kısa başlık listeleri için etiket ızgarası.</div>
+        </div>
+        <div>
+          <div style="border:1px solid #E1EBEB; background:#F8FCFC; padding:9pt 12pt">
+            <div style="display:grid; grid-template-columns:0.34in 1fr; gap:5pt 9pt; font-size:8.5pt; line-height:1.4">
+              <div style="font-weight:600; color:#116E68">C</div><div>Kod ve karşılığı</div>
+              <div style="font-weight:600; color:#116E68">61</div><div>Koyu turkuaz kod, düz metin açıklama</div>
+            </div>
+          </div>
+        <div style="font:400 8pt/1.4 'Archivo',sans-serif; color:#5C6B79; margin-top:5pt">Şekil E. Kod / karşılık blokları (NACE, mevzuat maddeleri).</div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:0.1in 0.8in 0.24in; display:grid; justify-items:center; row-gap:4pt">
+      <div style="justify-self:stretch; height:1px; background:#DCE3E9"></div>
+      <div>
+        <span style="font:400 8pt/1.3 'Archivo',sans-serif; letter-spacing:0.06em; color:#116E68">C</span>
+      </div>
+    </div>
+  </section>
+
+
+</doc-page>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#189B93&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#189B93&quot;,&quot;#116E68&quot;,&quot;#16335B&quot;],&quot;section&quot;:&quot;Görünüm&quot;},&quot;bodySize&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:11,&quot;min&quot;:9.5,&quot;max&quot;:12.5,&quot;step&quot;:0.5,&quot;unit&quot;:&quot;pt&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Görünüm&quot;},&quot;justify&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Görünüm&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() { this.applyTokens(); }
+  componentDidUpdate() { this.applyTokens(); }
+  applyTokens() {
+    const el = document.querySelector('doc-page');
+    if (!el) return;
+    el.style.setProperty('--ik-accent', this.props.accent || '#189B93');
+    el.style.setProperty('--ik-body', (this.props.bodySize ?? 11) + 'pt');
+    el.style.setProperty('--ik-align', (this.props.justify ?? true) ? 'justify' : 'left');
+  }
+}
+
+</script>
+</body>
+</html>
