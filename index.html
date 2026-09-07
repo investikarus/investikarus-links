@@ -139,6 +139,17 @@
       color: var(--bg);
       font: 600 15px/1 'Archivo', sans-serif;
     }
+    .banner-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .banner-meta > [data-i18n] {
+      font: 500 9.5px/1 'Archivo', sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      opacity: .62;
+    }
     
     .grid-links {
       padding: 14px 22px 0;
@@ -210,8 +221,11 @@
 
     <div class="main-content">
       <div class="banner-link-container">
-        <a href="#" id="link-openissue" class="banner-link">
-          <span data-i18n="openissue">Son sayıyı aç</span><span style="font-size:18px">→</span>
+        <a data-row href="bulten/2026-09/" id="link-openissue" class="banner-link">
+          <span data-i18n="openissue">Son sayıyı aç</span>
+          <span class="banner-meta">
+            <span data-i18n="issue">Eylül 2026</span><span style="font-size:18px" aria-hidden="true">→</span>
+          </span>
         </a>
       </div>
 
@@ -321,6 +335,7 @@
     const translations = {
       'tr': {
         'openissue': 'Son sayıyı aç',
+        'issue': 'Eylül 2026',
         'web4': 'Web sitesi',
         'mail4': 'E-posta',
         'phone4': 'Telefon',
@@ -333,6 +348,7 @@
       },
       'en': {
         'openissue': 'Open latest issue',
+        'issue': 'September 2026',
         'web4': 'Website',
         'mail4': 'Email',
         'phone4': 'Phone',
@@ -377,7 +393,7 @@
       modal.style.display = 'none';
     }
 
-    document.getElementById('link-openissue').addEventListener('click', openModal);
+    // Son sayı gerçek bir sayfaya bağlı; yalnızca arşiv henüz hazır değil.
     document.getElementById('link-archive').addEventListener('click', openModal);
     
     closeBtn.addEventListener('click', closeModal);
